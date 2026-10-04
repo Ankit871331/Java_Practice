@@ -27,7 +27,7 @@ public class ImportantTopics {
 //Reference Variable --> It is a variable that stores the referance of the object or allow us to ue the mehods or fields of object.likeL Student s1 = new Student(); here Student is type/class and s1 is reverence variable and new Student() is a object.
 //Insance variable (Non-Static) --> variable that declared inside a class without using static keyword.like in class String name; int roll_no; so here each each object get its own seperate copy 
 //Insance variable (Static) -->variable that declared inside a class using static keyword. Like Static String name; static belongs to class and non static belongs to object , like Static String College = "AB" so every obj have the same college name 
-
+//This keyword --> this refers variable that refer to the current object of the class. uses fo this keywords is refer to the current object's instance variable , call the current object's method , class another constructor of the same class, 
 
 
 
