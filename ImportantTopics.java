@@ -28,14 +28,38 @@ public class ImportantTopics {
 //Insance variable (Non-Static) --> variable that declared inside a class without using static keyword.like in class String name; int roll_no; so here each each object get its own seperate copy 
 //Insance variable (Static) -->variable that declared inside a class using static keyword. Like Static String name; static belongs to class and non static belongs to object , like Static String College = "AB" so every obj have the same college name 
 //This keyword --> this refers variable that refer to the current object of the class. uses fo this keywords is refer to the current object's instance variable , call the current object's method , class another constructor of the same class, 
+//Premitive Data Type --> Primitive  data type are data type that store simple values, they do not store the object referance, they have no method , they have no object , they can not be null. there are 8 built in primitive data type that stores simple values data type are byte, sort, int, long, float, dupble, char, boolean.
+//Non-Primitive Data Type --> they are created form classes and store a reference to an object not the actual value directly.It also called Object type, reference Type, Derived Type,
+
+//Has-A-Relationship --> One class contains the object of the other class as field(Instance variable).Example Car is a class na Engin is a class now Car class has a field called Engin so it is Has a relationship.
+//Uses-A-Relationship --> It means one class temporarily use another class, usually through method , parameters, local variable, or return type
+// Example:
+// class Pen {
+//     void write() {
+//         System.out.println("Writing...");
+//     }
+// }
+// class Person {
+//     void writeWith(Pen pen) {   // Person USES-A Pen
+//         pen.write();
+//     }
+// }
+// public class Main {
+//     public static void main(String[] args) {
+//         Pen pen = new Pen();
+//         Person person = new Person();
+//         person.writeWith(pen);   // Person uses Pen
+//     }
+// }
+
+
+
+//Is-A-Relationship --> It means one class is a type of another classes, it implements using inheritance (extends), or interface(implemets).
 
 
 
 
-
-
-
-
+//so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
 
 
 
