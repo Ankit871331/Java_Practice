@@ -1,0 +1,17 @@
+1. instancence relationship
+2. Is-A-relationship(Inheritance) = constructor, private, static ye child ko inherit nahi hota. java automaticallically call super(); emplecetly . 
+when we use the super(element of parent ) so it means we are calling prametrixed constructor 
+
+types of inheritance 
+1.single
+2.multi-level
+3.heirechical
+4.nultiple ---> supported through interaces
+5. hybrid ---> supported though interface
+
+
+
+
+
+
+3. have a relationshp = conposition relationship 

@@ -53,13 +53,24 @@ public class ImportantTopics {
 // }
 
 
-
 //Is-A-Relationship --> It means one class is a type of another classes, it implements using inheritance (extends), or interface(implemets).
 
 
 
 
+//instancention relationship 
+
+
+
+
 //so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
+
+// association = agg + composiion 
+
+
+
+
+
 
 
 
