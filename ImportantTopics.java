@@ -31,7 +31,7 @@ public class ImportantTopics {
 //Premitive Data Type --> Primitive  data type are data type that store simple values, they do not store the object referance, they have no method , they have no object , they can not be null. there are 8 built in primitive data type that stores simple values data type are byte, sort, int, long, float, dupble, char, boolean.
 //Non-Primitive Data Type --> they are created form classes and store a reference to an object not the actual value directly.It also called Object type, reference Type, Derived Type,
 
-//Has-A-Relationship --> One class contains the object of the other class as field(Instance variable).Example Car is a class na Engin is a class now Car class has a field called Engin so it is Has a relationship.
+//Has-A-Relationship (composition relationship)--> One class contains the object of the other class as field(Instance variable).Example Car is a class na Engin is a class now Car class has a field called Engin so it is Has a relationship.
 //Uses-A-Relationship --> It means one class temporarily use another class, usually through method , parameters, local variable, or return type
 // Example:
 // class Pen {
@@ -53,18 +53,52 @@ public class ImportantTopics {
 // }
 
 
-//Is-A-Relationship --> It means one class is a type of another classes, it implements using inheritance (extends), or interface(implemets).
+//Is-A-Relationship(Inheritance) --> It means one class is a type of another classes, it implements using inheritance (extends), or interface(implemets).Constructor , Private, Static  can not be inherite by child . Child class automaticall call super()(parent constructor).
+
+
+//Types of Inheritance
+
+//1.Single --> single inheritance which means one child class inherit from exactly one parent class.
+
+//Multi-level --> It means inherit happen in chain
+
+//Hierarchical  ---> It means multiple child classes inherit from a single class like one parent have two or more then two child 
+
+//Multiple --> 
+//Hybrid --> 
+
+
+
+//================================== Polymorphism ========================================================
+
+//It means a method can behave differently in different situation 
+//Types of polymorphism
+//1.Compile-Time-Polymorphism(Method overloading) = Java decide which method to call during compilation . We can create many methods using same names but the return type or parameter must be different.
+//2.Run-Time-Polymorphism(method overriding) = Parent and child can have similar method and write @Overriding in child on top of same method after extend.
+//Reference type decides which method is accessable like which method i have and Objec type decide the which overriding instance method call. like Animal a = new Dog(); if i call a.eat() so both have eat method so java called Dog()'s method and if i call a.bark() so it gives error because here Animal have no such a method and here reference type is Animal a.
+//Infinite recursion = when method keeps call itself withoud reaching the end of it.
+
+// =============================================================Upcasting and Downcasting=============================
+
+//Upcasting(Generalization) means the Parent class reference to the child object like Parent a = new Child(); here we can access parend method and overriden child method but only wrriten in child method can not be accessed.
+//Downcasting(specilization) = converting parent reference into child reference before Parent p = new Child() now Child c = (Child) a;
+//ClassCastException =  is a error of we cast the different object into differnt like Parent p = new Child1(); now Child c = (Child) P, here child1 is compulasary not child.use instanceof to safe casting like ( if instanceof a dog d so do this )
+//equalsIgnoreCase = it is string method which compare string without cmplaring uppercase or lowercase. 
+
+
+
+//================================================== Encapsulation ====================================
 
 
 
 
-//instancention relationship 
 
 
 
+
+//========================================Need to ask======================================================================
 
 //so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
-
 // association = agg + composiion 
 
 

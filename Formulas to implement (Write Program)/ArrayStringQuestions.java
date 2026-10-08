@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ArrayStringQuestions {
@@ -221,12 +222,82 @@ public class ArrayStringQuestions {
 
 // 19. Write a java program to add two matrices of the same size.
 
+// int[][] matrix1 = {{1,2,3,4}, {5,6,7,8}};
+// int[][] matrix2 = {{9,10,11,12},{13,14,15,16}};
+// int[][] sumMatrix = new int[matrix1.length][matrix1[0].length];
+
+// for(int i = 0; i<matrix1.length; i++){
+//     for(int j = 0; j<matrix1[0].length; j++){
+//         sumMatrix[i][j] = matrix1[i][j]+ matrix2[i][j];
+//     }
+// }
+
+// for(int[] n : sumMatrix){
+//     for(int k: n){
+//         System.out.print(k + " " );
+//     }
+//     System.out.println();
+// }
+
+
+
+//20. Write a java program to convert an array to ArrayList.
+
+
+// int[] arr = {1,2,3,4,5};
+
+// List<Integer>arraylist = new ArrayList<>();
+
+// for(int n : arr){
+//     arraylist.add(n);
+// }
+// System.out.println("List created");
+
+
+// for(int n: arraylist){
+//     System.out.println(n);
+// }
 
 
 
 
 
 
+// 21. Write a java program to convert an ArrayList to an array.
+
+// List<Integer>list = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+
+// int[] arr = new int[list.size()];
+// int i = 0;
+// for(int n: list){
+//     arr[i] = n;
+//     i++;
+// }
+
+// System.out.println("Array created");
+// for(int n: arr){
+//     System.out.println(n);
+// }
+
+
+
+
+// 22. Write a java program to find all pairs of elements in an array whose sum is equal to a specified number.
+
+int[] arr = {0,1,2,3,4,5,6,7};
+int target = 3;
+
+List<Integer>list =new ArrayList<>();
+
+
+for(int i = 1; i<arr.length; i++){
+
+    if(arr[i-1]+arr[i] == target){
+        list.add(i-1, i);
+    }
+}
+
+System.out.println("List created");
 
 
 
