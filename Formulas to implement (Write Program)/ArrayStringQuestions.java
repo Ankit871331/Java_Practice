@@ -284,20 +284,84 @@ public class ArrayStringQuestions {
 
 // 22. Write a java program to find all pairs of elements in an array whose sum is equal to a specified number.
 
-int[] arr = {0,1,2,3,4,5,6,7};
-int target = 3;
+// int[] arr = {0,1,2,3,4,5,6,7};
+// int target = 3;
 
-List<Integer>list =new ArrayList<>();
+// List<Integer>list =new ArrayList<>();
 
 
-for(int i = 1; i<arr.length; i++){
+// for(int i = 1; i<arr.length; i++){
 
-    if(arr[i-1]+arr[i] == target){
-        list.add(i-1, i);
-    }
-}
+//     if(arr[i-1]+arr[i] == target){
+//         list.add(i-1, i);
+//     }
+// }
 
-System.out.println("List created");
+// System.out.println("List created");
+
+
+// 23. Write a java program to test the equality of two arrays.
+
+// int[] arr1 = new int[] {1,2,3,4,5};
+// int[] arr2 = {5,4,3,2,1};
+
+// Arrays.sort(arr1);
+// Arrays.sort(arr2);
+// boolean diffArr = false;
+
+// for(int i = 0; i<arr1.length; i++){
+//         if(arr1[i] != arr2[i]){
+//             diffArr = true;
+//         }
+//     }
+
+
+// if(diffArr){
+//     System.out.println("array not equal");
+// }else{
+//     System.out.println("Equals");
+// }
+
+
+
+//24. Write a java program to find a missing number in an array.
+
+
+
+// int[] arr1 = new int[] {1,3,3,4,5};
+
+// for(int i = 0 ; i<arr1.length; i++){
+//     if(arr1[i] != i+1){
+//         System.out.println("value is missing in array " + (i+1) );
+//     }
+// }
+
+
+
+
+// 25. Write a java program to find common elements from three sorted (in non-decreasing order) arrays.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

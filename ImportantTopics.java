@@ -86,17 +86,43 @@ public class ImportantTopics {
 //equalsIgnoreCase = it is string method which compare string without cmplaring uppercase or lowercase. 
 
 
+//========================================================= Abstract keyword(abstract classes and methods) ======================================
+//The abstract keyword is used to declare incomplete classes and methods that are intended to be completed or implemented by subclasses.
+//Abstract class: A class that cannot be instantiated directly and may contain both abstract and concrete methods.
+// Abstract method: A method declared without a body that a concrete subclass must implement, unless that subclass remains abstract.
+
+
 
 //================================================== Encapsulation ====================================
 
+// Wrapping a data into a single unit is called encapsulation. Encapuslation provides us data hiding which can achived with access modifiers and packages.
+// Packages = It is kind of folder which stores several files. Use this namespace collision nahi hota , like i have two different packages and same file in that . 
+//Access modifiesr = Public, Private,  protacted(accessable everywhere accept different packages subclass), defautl(No keyword need to write) accessable in same packages or folder
+//Access modifier or return type how to use it like void teach(){} = here access a default and return type is void if i have to give the public so it would be public void teach(){}
+//
+
+// ===================================== POJO ==================================================================
+//Plain Object Java Object
+// seter/Mutator/ and gatter/accessarer 
 
 
+//================================================ Abstraction ==============================================
+// hiding only implement details and showing only necessarily details
+//declarative programming englarative progrmming 
+// Abstract class 
 
 
+//================================================= Association with implementation ==================================
+//Association mean tow separate classes are connected throught their object. Neither class own the other completely-they just know abut each other.
+//Types of association:
+        //a. weak "has-a"
+        //b. Strong "has-a"
 
+//Aggregation (weak association) --> one class contains another but the container object can exist imdepedently.like A department has a profeser if department is close or destroyed so still profeser exist.
+//4. Composition (Strong Association) --> A can has a engin if can destroyed so engin too.
+   
 
-
-//========================================Need to ask======================================================================
+//======================================== Need to ask ======================================================================
 
 //so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
 // association = agg + composiion 
