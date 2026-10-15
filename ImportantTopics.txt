@@ -134,25 +134,27 @@ Default method in interface is method that have body in interface it comes in ja
 Private method is a method that have body in interface but it is accessable in interface only not accessable outside
 Abstract methods are the most fundamental member of an interface. They are implicitly public abstract.
 
-========================================= Interface ===========================================
-Interface is a blueprint or contract that define what a class must do. It can not be instantiated. It act as a reference type that contains abstract method(method signature without bodies) and constants.
-Treditional interface were commonly described as providing complete abstraction because they primarily declared abstract methods. However, since Java 8, interfaces can contain concrete default and static methods, and since Java 9, private methods with bodies.
-Interface can not have constructor. 
-Interface provide abstraction and loose coupling.
-Interface support polymorphism, inheritance, API constract design.
-Interface can be use as a reference type like : i have parent Vehical (interface) and a chile(class) so i can write Vehical v = new chile(); . So interface can be used as a reference type.
-Interface can have : public static method, public static final variable, default method, static method, private method(java 9+), private static method(java 9+).
-Using Interface , we can achieve total abstraction by hiding implementation details. 
-Variable are implicitly public, static, final not instance variable.
-abstract methods are implicitly public abstract.Default methods are public and have a body.Static methods are public static.Private methods are private and have a body.
-Method are implicitly public and static.
-Java 8+ allow default and static method with bodies.
-Java 9+ allow private method
-if have to give body to method in interface so give default.
-interface can not extent class
-private method used as a utility method 
-all methods in an interface are implicitly public unless declared private.
- diamond problem is occurs in multiple inheritance when a class inherit same method from to parent that both extend the common grandparent that create abiguity about which implementation to use.
+========================================= Interface (revision done) ===========================================
+-Interface is a blueprint or contract that define what a class must do. It can not be instantiated. It act as a reference type that contains abstract method(method signature without bodies) and constants.
+-Treditional interface were commonly described as providing complete abstraction because they primarily declared abstract methods. However, since Java 8, interfaces can contain concrete default and static methods, and since Java 9, private methods with bodies.
+-Interface can not have constructor. 
+-Interface method can not be final.
+-Interface provide abstraction and loose coupling.
+-Interface support polymorphism, inheritance, API constract design.
+-Interface can be use as a reference type like : i have parent Vehical (interface) and a chile(class) so i can write Vehical v = new chile(); . So interface can be used as a reference type.
+-Interface can have : public static method, public static final variable, default method, static method, private method(java 9+), private static method(java 9+).
+-Using Interface , we can achieve total abstraction by hiding implementation details. 
+-Variable are implicitly public, static, final not instance variable.
+-abstract methods are implicitly public abstract.Default methods are public and have a body.Static methods are public static.Private methods are private and have a body.
+-Method are implicitly public and static.
+-Java 8+ allow default and static method with bodies.
+-Java 9+ allow private method
+-if have to give body to method in interface so give default.
+-interface can not extent class
+-private method used as a utility method 
+-Interface can not have private field its field are implictly public static fianl.
+-all methods in an interface are implicitly public unless declared private.
+-diamond problem is occurs in multiple inheritance when a class inherit same method from to parent that both extend the common grandparent that create abiguity about which implementation to use.
 
         Interface A
        /           \
@@ -218,7 +220,60 @@ class D implements B, C {
     }
 }
 
-A method implemented in a class takes precedence over an interface default method.
+-A method implemented in a class takes precedence over an interface default method.
+
+=========================================================== Comparable(Package: java.lang) vs Comparator(Package: java.util) =======================================================================
+-Comparable and Comparator are used to define sorting order. Comparable is in java.lang and defines natural ordering through compareTo(). Comparator is in java.util and defines custom ordering through compare(). A class typically implements Comparable for its natural order, whereas separate comparators allow multiple sorting criteria. Since Comparator is a functional interface, it can be implemented using a lambda expression.
+-Java gives you two ways to tell it "sort by this." comparable, comparator
+-EX: 
+        Imagine a line of people at a bus stop.
+
+        Comparable = Each person knows their own age. You just say "line up by age" and they figure it out themselves.
+
+        Comparator = A referee stands in front and says "next, line up by height" or "next, line up by shoe size." The people don't decide — the referee decides.
+
+-omparable — "I know my own order"
+The class itself decides how to compare.
+
+class Student {
+    int rollNo;
+    String name;
+
+    // "How do I compare myself with another student?"
+    // "By rollNo. If my rollNo is smaller, I come first."
+    int compareTo(Student other) {
+        return this.rollNo - other.rollNo;
+    }
+}
+
+-Collections.sort(list);  // "just sort them" — they know how
+
+-Problem in comparable: Only ONE way to sort. If you also want to sort by name, you'd have to rewrite compareTo() → you lose the rollNo sorting.
+
+
+-Comparator — "An outsider decides the order"
+You create a separate object that says "sort them like THIS."
+
+// "Sort by name"
+Comparator<Student> byName = (s1, s2) -> {
+    return s1.name.compareTo(s2.name);
+};
+
+// "Sort by age"
+Comparator<Student> byAge = (s1, s2) -> {
+    return s1.age - s2.age;
+};
+
+
+-Now you can sort as many ways as you want without touching the Student class:
+Collections.sort(list, byName);  // sort by name
+Collections.sort(list, byAge);   // sort by age   
+
+
+
+
+
+
 
 ========================================================= Functional Interface (SAM Interface) =======================================================
 A interface which have only one abstract method (SAM — Single Abstract Method) and default and with body can have many methods but there must be only one abstaract method.
@@ -307,8 +362,18 @@ public class Main {
 }   
 
 ============================================================== Marker Interface ==============================================
--A marker interface (also called a tag interface) is an empty interface — no methods, no fields, no constants.  It just tags a class so the JVM knows to treat it specially.
+-A  marker interface is just an empty interface (no methods, no fields) that you attach to a class to tell the JVM "this class has a special ability  It just tags a class so the JVM knows to treat it specially.
+-If we have to save out object in the file so we need implements Serializable , with Serializable java say "Okay, I'll convert your object's fields into bytes and write them to the file.".
+-A marker interface is an empty interface with no methods or fields.  It's used to tag a class so the JVM can check for it at runtime and apply special behavior.  The classic examples are Serializable and Cloneable. If a class doesn't implement the marker interface, the JVM throws an exception when the operation is attempted.
 
+Marker Interface	        What JVM checks	                                Exception if not implemented
+
+Serializable	            Can this object be saved to a file?	            NotSerializableException
+Cloneable	                Can this object be cloned?	                    CloneNotSupportedException
+Remote	                    Is this a remote method call (RMI)?	            NotSerializableException
+
+-Serializable — java.io
+-Cloneable — java.lang
 
 
 ======================================================== Strings ============================================
@@ -323,9 +388,10 @@ the sequense of character are called string
 -StringBuilder , it is not synchronised and not thread safe it comes in java 1.5
 
 ========================================= Exception handling =============================================================
-
-
-
+-it is a phenomenon that crash our flow of program 
+-Tye-catch, throw, throws, finally  
+- all exception are child of Exception class in java
+-Exception hierarchy must learn
 
 ======================================== Need to ask ======================================================================
 
@@ -335,6 +401,8 @@ Loose coupling.
 Instantiation vs reference type
 utility method
 what is lembda expression
+-Is functional interface, marker interface are the types of interface?
+-Sealed Interface (Java 17+)
 
 
 
