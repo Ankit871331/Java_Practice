@@ -19,7 +19,7 @@ Loop statement/ conditional statement
 
 
 
----------------------------------------------------------  OOP Implementation ---------------------------------------------------
+*********************************************************************  OOP start *********************************************************************
 
 class --> class is a set of object which share common strecture and behaviour just like template.
 object --> object is a real instance of class 
@@ -66,18 +66,88 @@ Hierarchical  ---> It means multiple child classes inherit from a single class l
 Multiple --> 
 Hybrid --> 
 
+**************************************************************** Polymorphism start ***********************************************************************************************************
 
 
-================================== Polymorphism ========================================================
+====================================================================== Polymorphism ========================================================
 
-It means a method can behave differently in different situation 
-Types of polymorphism
-1.Compile-Time-Polymorphism(Method overloading) = Java decide which method to call during compilation . We can create many methods using same names but the return type or parameter must be different.
-2.Run-Time-Polymorphism(method overriding) = Parent and child can have similar method and write @Overriding in child on top of same method after extend.
-Reference type decides which method is accessable like which method i have and Objec type decide the which overriding instance method call. like Animal a = new Dog(); if i call a.eat() so both have eat method so java called Dog()'s method and if i call a.bark() so it gives error because here Animal have no such a method and here reference type is Animal a.
-Infinite recursion = when method keeps call itself withoud reaching the end of it.
+-It means a method can behave differently in different situation 
+-Types of polymorphism:
+    1.Compile-Time-Polymorphism(Method overloading) = Compile-time polymorphism (also known as static polymorphism) is achieved through method overloading, where the method to be executed is resolved by the compiler based on the method signature and arguments.
+        Same method name, different parameters — the compiler picks the right one. 
 
-=============================================================Upcasting and Downcasting=============================
+        class Calculator {
+            // 2 parameters
+            int add(int a, int b) {
+                return a + b;
+            }
+            // 3 parameters
+            int add(int a, int b, int c) {
+                return a + b + c;
+            }
+            // different data types
+            double add(double a, double b) {
+                return a + b;
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Calculator calc = new Calculator();
+                System.out.println(calc.add(5, 10));         // 15  → add(int, int)
+                System.out.println(calc.add(5, 10, 15));     // 30  → add(int, int, int)
+                System.out.println(calc.add(5.5, 10.2));     // 15.7 → add(double, double)
+            }
+        }
+
+        Why compile-time? The compiler sees the argument types at compile time and binds the call to the specific method signature.  No inheritance needed — it works within a single class.
+
+
+    2.Run-Time-Polymorphism(method overriding) = Runtime polymorphism (also known as dynamic polymorphism) is achieved through method overriding, where the method to be executed is resolved by the Java Virtual Machine (JVM) at runtime based on the actual object instance. 
+    Runtime Polymorphism (Method Overriding)
+        Same method in parent and child class — the JVM picks the right one based on the actual object. 
+
+        class Animal {
+            void sound() {
+                System.out.println("Animal makes a sound");
+            }
+        }
+
+        class Dog extends Animal {
+            @Override
+            void sound() {
+                System.out.println("Dog barks");
+            }
+        }
+
+        class Cat extends Animal {
+            @Override
+            void sound() {
+                System.out.println("Cat meows");
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Animal animal;
+
+                animal = new Dog();
+                animal.sound();   // "Dog barks"  ← Dog's version called
+
+                animal = new Cat();
+                animal.sound();   // "Cat meows"  ← Cat's version called
+            }
+        }
+
+        Why runtime? The reference type is Animal, but the JVM checks the actual object (Dog or Cat) at runtime to decide which sound() to execute.  This is called late binding or dynamic dispatch.
+
+
+
+**************************************************************** Polymorphism end **********************************************************************************************************************
+
+
+
+============================================================= Upcasting and Downcasting =============================
 
 Upcasting(Generalization) means the Parent class reference to the child object like Parent a = new Child(); here we can access parend method and overriden child method but only wrriten in child method can not be accessed.
 Downcasting(specilization) = converting parent reference into child reference before Parent p = new Child() now Child c = (Child) a;
@@ -124,7 +194,7 @@ Aggregation (weak association) --> one class contains another but the container 
 4. Composition (Strong Association) --> A can has a engin if can destroyed so engin too.
 
 
-================================== final ==============================================
+===================================================================== final =====================================================================
 final is a keyword(modifier) that means can't be change  
 
 
@@ -133,6 +203,12 @@ Static method that belongs to the class itself not to any specific object. We ca
 Default method in interface is method that have body in interface it comes in java 8+ versions. 
 Private method is a method that have body in interface but it is accessable in interface only not accessable outside
 Abstract methods are the most fundamental member of an interface. They are implicitly public abstract.
+
+
+
+
+**************************************************************** Interface ******************************************************************************************************************
+
 
 ========================================= Interface (revision done) ===========================================
 -Interface is a blueprint or contract that define what a class must do. It can not be instantiated. It act as a reference type that contains abstract method(method signature without bodies) and constants.
@@ -376,6 +452,10 @@ Remote	                    Is this a remote method call (RMI)?	            NotSe
 -Cloneable — java.lang
 
 
+**********************************************************************************************************************************************************************************
+
+
+
 ======================================================== Strings ============================================
 the sequense of character are called string
 -String is non premitive
@@ -393,6 +473,66 @@ the sequense of character are called string
 - all exception are child of Exception class in java
 -Exception hierarchy must learn
 
+-Family tree of exception handling
+
+            Throwable  (the grandfather of all problems)
+            |
+            ├── Exception      → "Problems you CAN recover from"
+            │      |
+            │      ├── Checked Exception     → Compiler FORCES you to handle
+            │      └── RuntimeException      → Compiler doesn't care (bugs)
+            │
+            └── Error          → "Problems you CANNOT fix" (JVM level)
+
+
+
+- there is three types of problem in exception handling 
+
+1.Checked — compiler forces you to check 
+2.Runtime (Unchecked) — compiler ignores, it's your bug and it comes due to the error in code so we have to write good code
+3.Error — don't touch, JVM's problem
+
+-Checked vs Unchecked — The Simple Rule
+   - Checked = "External world problem" = Things outside your control — file missing, network down, DB not reachable. Because these failures are expected and recoverable. Java wants you to to handle this error.
+   - Unchecked = "Your bug" = You wrote bad code — null pointer, wrong index, divide by zero. we should fix the code not try to use try or catch 
+
+
+- ⚠️ Rule: Child first, Parent later
+
+// ❌ WRONG — won't compile
+catch (Exception e) { }        // parent first
+catch (NullPointerException e) { }  // child after — UNREACHABLE
+
+// ✅ CORRECT
+catch (NullPointerException e) { }  // specific first
+catch (Exception e) { }             // general later
+
+
+****************************88************************  throw vs throws *********************************************
+-throw = I'm throwing it NOW
+-Ex:
+        if (age < 18) {
+            throw new IllegalArgumentException("Too young!");
+        }
+
+
+-throws = I MIGHT throw it, be warned
+
+-EX:
+    public void readFile() throws IOException {
+        FileReader fr = new FileReader("data.txt");
+    }
+
+throw → you throw a ball 🏀 (object)
+
+throws → you declare "I might throw" (warning in signature)
+
+*************************************************************** Types of run time error ****************************************************
+
+
+
+
+
 ======================================== Need to ask ======================================================================
 
 so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
@@ -406,6 +546,25 @@ what is lembda expression
 
 
 
+*********************************************************************  OOP end *********************************************************************
 
+
+
+
+================================================== Linke LIst ====================================
+- Like array store element in indexes and Link List stores element in saperate object called node where each node holds the data and the reference of the next node.
+-Node = Node is an objet containing tow things data(the value) and next(reference of next node)
+
+-Creating node like:
+
+class Node {
+    int data;
+    Node next;  // is not an integer. It is a reference whose type is Node
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
 
 

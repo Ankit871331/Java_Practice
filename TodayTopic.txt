@@ -1,8 +1,0 @@
-
-type of inheritance ---> will done later
-
-4.multiple ---> supported through interaces
-5. hybrid ---> supported though interface
-
-==================================================
-
