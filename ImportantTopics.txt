@@ -467,6 +467,78 @@ the sequense of character are called string
 -StringBuffer is mutable and synchronised and thread safe it comes in java 1
 -StringBuilder , it is not synchronised and not thread safe it comes in java 1.5
 
+- Strig Methods
+
+    length()
+
+    charAt(int)
+
+    substring(int) - give a new string int he place of int place index from you want
+
+    substring(int, int)
+
+    equals(Object)
+
+    equalsIgnoreCase(String)
+
+    compareTo(String)
+
+    compareToIgnoreCase(String)
+
+    indexOf(...)
+
+    lastIndexOf(...)
+
+    contains(CharSequence)
+
+    startsWith(String)
+
+    endsWith(String)
+
+    replace(CharSequence, CharSequence)
+
+    replaceAll(String, String)
+
+    replaceFirst(String, String)
+
+    split(String)
+
+    split(String, int)
+
+    join(CharSequence, CharSequence...)
+
+    trim()
+
+    strip()
+
+    stripLeading()
+
+    stripTrailing()
+
+    isEmpty()
+
+    isBlank()
+
+    toLowerCase()
+
+    toUpperCase()
+
+    concat(String)
+
+    matches(String)
+
+    repeat(int)
+
+    intern()
+
+    toCharArray()
+
+    valueOf(...)
+
+    format(String, Object...)
+
+
+
 ========================================= Exception handling =============================================================
 -it is a phenomenon that crash our flow of program 
 -Tye-catch, throw, throws, finally  
