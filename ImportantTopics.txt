@@ -479,15 +479,15 @@ the sequense of character are called string
 
     equals(Object)
 
-    equalsIgnoreCase(String)
+    equalsIgnoreCase(String) = it check the string and ignore the lower case or upper case it just check the string. 
 
-    compareTo(String)
+    compareTo(String) -> it basically check the order like which comes first and which come after it give value + whne char come after it - when before and 0 when same. 
 
-    compareToIgnoreCase(String)
+    compareToIgnoreCase(String) -> similar like compareTo but there is one more featur with it i do not consider the case like it is upper case or lower case it just ingnore it 
 
-    indexOf(...)
+    indexOf(...) -> give the index of the character which cme first like there is banana so if i check indexOf("a") so it give 1 because it check the first occurance.
 
-    lastIndexOf(...)
+    lastIndexOf(...) -> it check the last one like indexOf(..) check the first one.
 
     contains(CharSequence)
 
@@ -495,23 +495,29 @@ the sequense of character are called string
 
     endsWith(String)
 
-    replace(CharSequence, CharSequence)
+    replace(CharSequence, CharSequence) -> rewise it 
 
-    replaceAll(String, String)
+    replaceAll(String, String) -> rewise it with    replace(CharSequence, CharSequence).
 
-    replaceFirst(String, String)
+    replaceFirst(String, String) -> only replace the first one.
 
     split(String)
 
-    split(String, int)
+    split(String, int) -> it split the string accoording to the ummber and it return an array of char 
 
-    join(CharSequence, CharSequence...)
+    join(CharSequence, CharSequence...):
+                                String result = String.join(" ", "I", "love", "Java");
+                                System.out.println(result); // I love Java
 
-    trim()
+    trim():
+            String s = "   Hello World   ";
+            String result = s.trim(); // "Hello World"
+ 
 
-    strip()
+    strip(): -> rewise
 
-    stripLeading()
+
+    stripLeading() -> start from here to study  
 
     stripTrailing()
 
@@ -599,24 +605,83 @@ throw → you throw a ball 🏀 (object)
 
 throws → you declare "I might throw" (warning in signature)
 
-*************************************************************** Types of run time error ****************************************************
+***************************************************************check or unchecked exception  ****************************************************
+check  - >  
+uncheck  -> 
+throws -> in the functin signature 
+throw -> apply in the bory 
+file -> funtin method loead all the things 
+try with resourse -> it automatically cllse file java se 7 update 
+file handling hierarchy full study 
+Nio and Nio 2 
 
 
 
+=================================================================== File operation ======================================================
+-There are two main things 
+-Write = 
+- Read = 
+- Important classes = File, FileWriter, FileReader  all of them belong to the java.io
+
+-Create file:
+
+            import java.io.File;
+            import java.io.IOException;
+
+            public class Demo {
+                public static void main(String[] args) {
+                    File f = new File("myfile.txt");   // just a "pointer" — no real file yet created in disk to create actual file use createNewFile();
+                    System.out.println("File object created");
+
+                    try{
+            if(f.createNewFile()){
+                System.out.println("File created " + f.getName());
+            }else{
+                System.out.println("File already exist");
+            }
+        }catch(IOException e){
+            System.out.println("Something went wrong "+ e.getMessage());
+        }
+                }
+            }
 
 
-======================================== Need to ask ======================================================================
 
-so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
-association = agg + composiion 
-Loose coupling.
-Instantiation vs reference type
-utility method
-what is lembda expression
--Is functional interface, marker interface are the types of interface?
--Sealed Interface (Java 17+)
+- Write in file =   FileWriter
 
+- Read file = FileReader  -> it read one character at a time.
 
+-Append to a File (add WITHOUT deleting) = FileWriter w = new FileWriter("myfile.txt", true);
+- Delete file = file.delete()
+
+************************************** Check file Info************************************************************
+File f = new File("myfile.txt");
+
+f.exists();        // true / false → does the file exist?
+f.isFile();        // true if it's a file (not folder)
+f.isDirectory();   // true if it's a folder
+f.getName();       // "myfile.txt"  → file name
+f.getPath();       // relative path
+f.getAbsolutePath(); // full path like "C:\Users\Rahul\myfile.txt"
+f.length();        // file size in bytes
+f.canRead();       // true if readable
+f.canWrite();      // true if writable
+f.lastModified();  // date/time (as a long)
+
+**************************************************************************************************
+
+-BufferOutput strim  = writing file
+-try with resourse = we do not need to write file.close()
+nio
+nio2
+0
+============file handling by bitebaseed =================================
+
+================================file handling by character based ======================================
+-bufferreader = take input in string 
+- class ka object serialized 
+- object inpus, object outpust stream , 
+- transeant to do not same field in the file 
 
 *********************************************************************  OOP end *********************************************************************
 
@@ -640,3 +705,15 @@ class Node {
 }
 
 
+======================================== Need to ask ======================================================================
+
+so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
+association = agg + composiion 
+Loose coupling.
+Instantiation vs reference type
+utility method
+what is lembda expression
+-Is functional interface, marker interface are the types of interface?
+-Sealed Interface (Java 17+)
+- what is IOException it is class of method or what as similar that all fo relatd to the error or exception 
+-what is FileWriter class or method how to fing like that 
