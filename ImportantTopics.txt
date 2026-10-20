@@ -755,9 +755,34 @@ public class Demo {
 ********************************* file read with scanner  end *****************************
 
 ******************************************* try-with-resources start ***************************************************
+-It come in java 7+
+- it comes because it solve the problem of file.close();
+-  before java 7 people use to do file.colse using finally block 
+
+-try-with-resources? = It's a special form of try that automatically calls close() on your resources when the block finishes — even if an error happens.
+-EX:
+
+            try (ResourceType resource = new ResourceType(...)) {
+                // use resource here
+            } catch (ExceptionType e) {
+                // handle error
+            }
+            // ← close() is called AUTOMATICALLY here, before catch even runs
+
+-Not every class works in try(...). The class must implement AutoCloseable (or its child Closeable).
 
 
+                                    Classes that work:
 
+Class	            Package	            What it's for
+FileReader	        java.io	            Reading text
+FileWriter	        java.io	            Writing text
+BufferedWriter	    java.io	            Fast writing
+BufferedReader	    java.io	            Fast reading
+Scanner	            java.util	        Reading
+PrintWriter	        java.io	            Printing
+FileInputStream	    java.io	            Binary reading
+FileOutputStream	java.io	            Binary writing
 
 
 ******************************************* try-with-resources end ***************************************************
