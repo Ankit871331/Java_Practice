@@ -617,7 +617,7 @@ Nio and Nio 2
 
 
 
-=================================================================== File operation ======================================================
+=================================================================== File Handling start ======================================================
 -There are two main things 
 -Write = 
 - Read = 
@@ -730,6 +730,38 @@ f.lastModified();  // date/time (as a long)
 -Create a file =Files.createFile(Paths.get("newfile.txt"));
  ************************************************** Modern way nio end *****************************************
 
+********************************* file read with scanner *****************************8
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Demo {
+    public static void main(String[] args) {
+        try {
+            Scanner sc = new Scanner(new File("myfile.txt"));
+            String line = sc.nextLine();   // read one line
+            System.out.println(line);
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+    }
+}
+
+
+-Scanner constructor specifically throws FileNotFoundException (a subclass of IOException).
+
+
+********************************* file read with scanner  end *****************************
+
+******************************************* try-with-resources start ***************************************************
+
+
+
+
+
+******************************************* try-with-resources end ***************************************************
+
 
 -BufferOutput strim  = writing file
 -try with resourse = we do not need to write file.close()
@@ -743,6 +775,27 @@ nio2
 - class ka object serialized 
 - object inpus, object outpust stream , 
 - transeant to do not same field in the file 
+
+
+
+
+*********************************** cheet sheet of file handling *********************************************
+
+                                            Complete Cheat Sheet 🧠
+
+Task	            Old way	                                                Modern way (Files)
+Create file	        f.createNewFile()	                                    Files.createFile(path)
+Write (fresh)	    new FileWriter("f.txt") + write() + close()	            Files.writeString(path, "text")
+Append	            new FileWriter("f.txt", true)	                        Files.writeString(path, "text", APPEND)
+Read whole	        FileReader char by char (slow)	                        Files.readString(path)
+Read line by line	BufferedReader + readLine()	                            Files.readAllLines(path)
+Delete	            f.delete()	                                            Files.delete(path)
+Exists?	            f.exists()	                                            Files.exists(path)
+File size	        f.length()	                                            Files.size(path)
+
+
+
+==================================================== File Handling end ====================================================
 
 *********************************************************************  OOP end *********************************************************************
 
