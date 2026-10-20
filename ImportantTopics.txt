@@ -654,7 +654,7 @@ Nio and Nio 2
 -Append to a File (add WITHOUT deleting) = FileWriter w = new FileWriter("myfile.txt", true);
 - Delete file = file.delete()
 
-************************************** Check file Info************************************************************
+************************************** Check file Info start ************************************************************
 File f = new File("myfile.txt");
 
 f.exists();        // true / false → does the file exist?
@@ -668,7 +668,68 @@ f.canRead();       // true if readable
 f.canWrite();      // true if writable
 f.lastModified();  // date/time (as a long)
 
-**************************************************************************************************
+**************************************************************Check file Info end********************************************************************
+
+*********************************************Problem with file reader/writer start*********************************************
+-FileReader reads one character at a time,so for a big file it is very slow.
+-FileWriter write one character at a time , too slow.
+- So java upgrade it to it with buffered  version in java 1.1 
+
+
+
+*********************************************Problem with file reader/writer end*********************************************
+
+************************************* Buddered version start *******************************************************
+-BufferedWriter  = write fast
+- BufferedReader
+
+************************************* Buddered version end *******************************************************
+
+
+************************************************** Modern way nio  start *****************************************
+-The MODERN way — Files class (Java 7+) = Java later added a much cleaner way to read and write files in one line. It's called java.nio.file.Files.
+
+            import java.nio.file.Files;
+            import java.nio.file.Path;
+            import java.nio.file.Paths;
+            import java.util.List;
+            import java.io.IOException;
+            
+
+- Write in one line = Files.writeString(Paths.get("myfile.txt"), "Hello from Files class!");
+- Read in one line = String content = Files.readString(Paths.get("myfile.txt"));
+                    System.out.println(content);
+
+
+-Read as a list of lines
+
+            List<String> lines = Files.readAllLines(Paths.get("myfile.txt"));
+            for (String line : lines) {
+                System.out.println(line);
+            }
+
+-Write many lines= 
+
+                List<String> lines = List.of("Line 1", "Line 2", "Line 3");
+                Files.write(Paths.get("myfile.txt"), lines);
+
+
+-Append in one line
+
+            Files.writeString(
+                Paths.get("myfile.txt"),
+                "Added at the end\n",
+                StandardOpenOption.APPEND
+            );
+
+-Check if file exists =Files.exists(Paths.get("myfile.txt"));   // true / false
+
+-Delete =       Files.delete(Paths.get("myfile.txt"));
+                Files.deleteIfExists(Paths.get("myfile.txt"));   // no error if missing
+
+-Create a file =Files.createFile(Paths.get("newfile.txt"));
+ ************************************************** Modern way nio end *****************************************
+
 
 -BufferOutput strim  = writing file
 -try with resourse = we do not need to write file.close()
@@ -717,3 +778,5 @@ what is lembda expression
 -Sealed Interface (Java 17+)
 - what is IOException it is class of method or what as similar that all fo relatd to the error or exception 
 -what is FileWriter class or method how to fing like that 
+-what is buffferinput/ ouput stream
+-study more bufferr class or operations use the clicked photo in my phone 

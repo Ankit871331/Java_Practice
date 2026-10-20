@@ -1,4 +1,4 @@
-package FileOperation;
+package FileHandling.FileOperation;
 import java.io.File;
 public class DeleetFile {
     public static void main(String[] args) {
