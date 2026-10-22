@@ -1,0 +1,21 @@
+=========================================================== HiberNet ==================================================
+
+-it is orm too 
+-hyber have databasee spacifix dilag(class),
+-Mapping =  
+HDM file 
+
+postgress download
+
+
+
+
+
+
+
+
+
+
+
+
+

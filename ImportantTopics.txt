@@ -67,10 +67,6 @@ Multiple -->
 Hybrid --> 
 
 **************************************************************** Polymorphism start ***********************************************************************************************************
-
-
-====================================================================== Polymorphism ========================================================
-
 -It means a method can behave differently in different situation 
 -Types of polymorphism:
     1.Compile-Time-Polymorphism(Method overloading) = Compile-time polymorphism (also known as static polymorphism) is achieved through method overloading, where the method to be executed is resolved by the compiler based on the method signature and arguments.
@@ -103,7 +99,7 @@ Hybrid -->
         Why compile-time? The compiler sees the argument types at compile time and binds the call to the specific method signature.  No inheritance needed — it works within a single class.
 
 
-    2.Run-Time-Polymorphism(method overriding) = Runtime polymorphism (also known as dynamic polymorphism) is achieved through method overriding, where the method to be executed is resolved by the Java Virtual Machine (JVM) at runtime based on the actual object instance. 
+    2.Run-Time-Polymorphism(method overriding) = Runtime polymorphism (also known as dynamic polymorphism) is achieved through method overriding, where the method to be executed is resolved by the Java Virtual Machine (JVM)(VM uses dynamic method dispatch to invoke the overridden method based on the actual object type at runtime, rather than the reference type.) at runtime based on the actual object instance. 
     Runtime Polymorphism (Method Overriding)
         Same method in parent and child class — the JVM picks the right one based on the actual object. 
 
@@ -752,7 +748,30 @@ public class Demo {
 -Scanner constructor specifically throws FileNotFoundException (a subclass of IOException).
 
 
-********************************* file read with scanner  end *****************************
+********************************* file read with scanner  end ***************************************************************
+
+************************************************* Folders handling  start*******************************************************
+
+--Create a folder = 
+                    File folder = new File("myfolder");
+
+                            if (folder.mkdir()) {
+                                System.out.println("✅ Folder created: " + folder.getName());
+                            } else {
+                                System.out.println("❌ Could not create (already exists?)");
+                            }
+
+
+                            
+-mkdirs() =  makes ALL folders in the path
+
+-List files inside a folder  = list() — gives you names only
+        String[] names = folder.list();
+
+
+
+
+************************************************* Folders handling  end*******************************************************88
 
 ******************************************* try-with-resources start ***************************************************
 -It come in java 7+
@@ -788,7 +807,7 @@ FileOutputStream	java.io	            Binary writing
 ******************************************* try-with-resources end ***************************************************
 
 
--BufferOutput strim  = writing file
+-BufferOutput strim  = writing file.+
 -try with resourse = we do not need to write file.close()
 nio
 nio2
@@ -826,7 +845,6 @@ File size	        f.length()	                                            Files.s
 
 
 
-
 ================================================== Linke LIst ====================================
 - Like array store element in indexes and Link List stores element in saperate object called node where each node holds the data and the reference of the next node.
 -Node = Node is an objet containing tow things data(the value) and next(reference of next node)
@@ -858,3 +876,10 @@ what is lembda expression
 -what is FileWriter class or method how to fing like that 
 -what is buffferinput/ ouput stream
 -study more bufferr class or operations use the clicked photo in my phone 
+
+-File handling :
+                Binary files — FileInputStream / FileOutputStream (for images, etc.)
+
+                Serialization — save whole Java objects to files
+
+                RandomAccessFile — jump to any position in a file
