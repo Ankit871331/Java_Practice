@@ -139,6 +139,36 @@ Hybrid -->
 
 
 
+
+
+ ******************************************* Covariant Return Types ***************************************
+
+
+-This = this is kerwork in java that means the current object(he object on which the method was called.).
+
+-understand this carefully = 
+
+class Animal {
+    Animal getAnimal() {
+        return this;
+    }
+}
+
+
+Animal a = new Animal();     // ① create real object, name it `a`
+Animal b = a.getAnimal();    // ② call the method
+
+What happens in step ②?
+
+a.getAnimal() starts running
+
+Inside the method, this points to the object a (the real Animal)
+
+return this; → gives back that object
+
+b now points to the same object as a
+
+
 **************************************************************** Polymorphism end **********************************************************************************************************************
 
 
