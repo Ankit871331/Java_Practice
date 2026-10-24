@@ -66,7 +66,7 @@ Hierarchical  ---> It means multiple child classes inherit from a single class l
 Multiple --> 
 Hybrid --> 
 
-**************************************************************** Polymorphism start ***********************************************************************************************************
+**************************************************************** Polymorphism start  done practice ***********************************************************************************************************
 -It means a method can behave differently in different situation 
 -Types of polymorphism:
     1.Compile-Time-Polymorphism(Method overloading) = Compile-time polymorphism (also known as static polymorphism) is achieved through method overloading, where the method to be executed is resolved by the compiler based on the method signature and arguments.
@@ -141,7 +141,7 @@ Hybrid -->
 
 
 
- ******************************************* Covariant Return Types ***************************************
+============================================================== Covariant Return Types ==============================================================
 
 
 -This = this is kerwork in java that means the current object(he object on which the method was called.).
@@ -168,7 +168,7 @@ return this; → gives back that object
 
 b now points to the same object as a
 
-******************************************** visibility  start*************************************************
+============================================================== visibility  start ==============================================================
 -we can increate visiblity by override but can not reduce like parent have method protected so we can public but not allow to do private in child while override
 
 
@@ -183,7 +183,7 @@ public	                private	            No
 protected	            private         	No
 Package-private	        protected	        Yes
 
-******************************************** visibility end *************************************************
+===========================================================================================================================
 
 - can final method overriden = No, a final method cannot be overridden in Java because the final keyword prevents subclasses from changing its implementation.
 
@@ -217,12 +217,162 @@ abstract class can have constructor.
 
 
 
-================================================== Encapsulation ====================================
+************************************************************************* Encapsulation start done practice *************************************************************************
 
-Wrapping a data into a single unit is called encapsulation. Encapuslation provides us data hiding which can achived with access modifiers and packages.
-Packages = It is kind of folder which stores several files. Use this namespace collision nahi hota , like i have two different packages and same file in that . 
+-Wrapping a data into a single unit is called encapsulation. Encapuslation provides us data hiding which can achived with access modifiers and packages.
+-Encapsulation is commonly achieved by declaring fields private and providing controlled access through public getter and setter methods.
+-Packages = It is kind of folder which stores several files. Use this namespace collision nahi hota , like i have two different packages and same file in that . 
 Access modifiesr = Public, Private,  protacted(accessable everywhere accept different packages subclass), defautl(No keyword need to write) accessable in same packages or folder
 Access modifier or return type how to use it like void teach(){} = here access a default and return type is void if i have to give the public so it would be public void teach(){}
+
+-can method private = yes method can be private 
+
+======================================================= Types of Encapsulated Classes (Intermediate) =====================================
+
+1. Fully Encapsulated (Read + Write)
+
+            class Person {
+                private String name;
+
+                public String getName() { return name; }
+                public void setName(String name) { this.name = name; }
+            }
+
+
+2. Read-Only (only getter) 
+
+            class Employee {
+                private final String id;
+
+                Employee(String id) { this.id = id; }
+
+                public String getId() { return id; }   // ← only getter, no setter
+            }
+
+
+
+3. Write-Only (only setter)
+
+            class Login {
+                private String password;
+
+                public void setPassword(String password) {   // ← only setter
+                    this.password = password;
+                }
+            }
+
+
+
+
+4: Fully Immutable 
+
+            final class Point {
+                private final int x;
+                private final int y;
+
+                Point(int x, int y) { this.x = x; this.y = y; }
+
+                public int getX() { return x; }
+                public int getY() { return y; }
+                // no setters at all
+            }
+
+
+ 5. Advanced Encapsulation (MNC-Level)
+
+        Defensive Copying
+
+        The PROBLEM 😱
+        You made your field private. You feel safe. But watch this:
+
+
+        import java.util.*;
+
+        class Team {
+            private List<String> members;          // private! nobody can touch it, right?
+
+            public Team(List<String> members) {
+                this.members = members;            // stores the reference
+            }
+
+            public List<String> getMembers() {
+                return members;                    // returns the reference
+            }
+        }
+
+
+
+        Now watch the attack:
+        java
+        List<String> myList = new ArrayList<>();
+        myList.add("Rahul");
+
+        Team t = new Team(myList);                 // create team with [Rahul]
+
+        // Attack 1: change the list AFTER giving it to Team
+        myList.add("Hacker");
+        System.out.println(t.getMembers());        // [Rahul, Hacker] 😱 CHANGED!
+
+        // Attack 2: change the list THROUGH the getter
+        t.getMembers().add("Intruder");
+        System.out.println(t.getMembers());        // [Rahul, Hacker, Intruder] 😱 CHANGED AGAIN!
+
+
+        What went wrong?
+        Your private field was not really protected. Why?
+
+        Because private protects the REFERENCE, not the OBJECT it points to.
+
+        Let me draw it:
+
+        text
+        myList ──────┐
+                        ├──────► [ ArrayList object ]  ← THE SAME LIST
+        Team.members ┘
+
+        The FIX ✅ — Defensive Copying
+        Don't store the caller's object. Store a COPY of it.
+        Don't return your object. Return a COPY of it.
+
+        java
+        import java.util.*;
+
+        class Team {
+            private final List<String> members;
+
+            public Team(List<String> members) {
+                this.members = new ArrayList<>(members);   // ✅ COPY IN
+            }
+
+            public List<String> getMembers() {
+                return new ArrayList<>(this.members);      // ✅ COPY OUT
+            }
+        }
+
+
+Why do we need BOTH copies?
+Copy	Where	Protects against
+Copy IN (constructor)	new ArrayList<>(members)	Caller changing the list after construction
+Copy OUT (getter)	return new ArrayList<>(...)	Caller changing the list through the returned reference
+If you only copy in, the caller can still attack through getMembers(). ❌
+If you only copy out, the caller can still attack through the original list they passed in. ❌
+You need both. ✅
+
+Which types need defensive copying?
+Only mutable types need copying:
+
+Type	                    Mutable?	        Needs defensive copy?
+String	                    ❌ Immutable	      ❌ No — String can't be changed
+Integer, int, double	    ❌ Immutable	      ❌ No
+List, Set, Map	            ✅ Mutable	     ✅ Yes
+Arrays int[], String[]	    ✅ Mutable	     ✅ Yes
+LocalDate (java.time)	    ❌ Immutable	     ❌ No
+
+Rule: If it's immutable, no copy needed. If it's mutable, copy it.
+
+
+
+************************************************************************* Encapsulation end  *************************************************************************
 
 
 ===================================== POJO ==================================================================
@@ -230,7 +380,7 @@ Plain Object Java Object
 seter/Mutator/ and gatter/accessarer 
 
 
-================================================ Abstraction ==============================================
+********************************************************************** Abstraction **********************************************************************
 hiding only implement details and showing only necessarily details
 Abstract class can have constructor. 
 declarative programming englarative progrmming 
@@ -260,10 +410,8 @@ Abstract methods are the most fundamental member of an interface. They are impli
 
 
 
-**************************************************************** Interface ******************************************************************************************************************
 
-
-========================================= Interface (revision done) ===========================================
+*************************************************************** Interface  done practice ***************************************************************
 -Interface is a blueprint or contract that define what a class must do. It can not be instantiated. It act as a reference type that contains abstract method(method signature without bodies) and constants.
 -Treditional interface were commonly described as providing complete abstraction because they primarily declared abstract methods. However, since Java 8, interfaces can contain concrete default and static methods, and since Java 9, private methods with bodies.
 -Interface can not have constructor. 
@@ -505,7 +653,7 @@ Remote	                    Is this a remote method call (RMI)?	            NotSe
 -Cloneable — java.lang
 
 
-**********************************************************************************************************************************************************************************
+*************************************************************** Interface end *******************************************************************************************************************
 
 
 
