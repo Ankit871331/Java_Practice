@@ -1,0 +1,1091 @@
+****************************************************************************************** Java Basic **********************88****************************************************************************************
+
+        
+
+---------------------------------------------------Introduction java------------------------------------------------------
+USP of java --> Java is simple, Java is strongly based on OOPS, Java is platform indepedent, Java is secure because it do not allow direct pointer manipulation and provide several security and varify bytecode, Java has garbage collection , Mutlithreading , it is fast because jvm and jit, provide many package mainly used for backend system, portable, dynamic, 
+
+JVM --> java virtual machine , JVM is a engin that runs bytecode , Hello.java ---> Javac ---> Hello.class here .class cotains the bytecode here JVM takes the bycode and execute it like -- Java bytecode ----> JVM -----> machine code.
+JRE --> Java Runtime Environment , provide the environment to run java application , JRE = JVM + Java runtime libraries, 
+JDK --> Java Development Kit , it is used to develop java application , JDK = JRE + Development Tool, 
+
+
+------------------------------------------------ Java Language Fundamentals ---------------------------------------------------------
+Identifiers ---> It is a name we give to something, like class Student here student is identifiers.
+Keyword ---> Is a reserved word in java that has spacial meaning to the compilor like let , String , Boolean, char, Integer, class ,public etc.
+Literals ---> A fixed value written in the java program like int age = 33; so here 33 is literals
+Data type --> It tells the java which kind of value a variable can store like in age - 33; so here age can store only Integer value only, types of data type --> premitive or referance data type, java had 8 premitive data type = byte, short, int , long, float, double , char , boolean , referance data type
+Loop statement/ conditional statement
+
+
+
+
+*********************************************************************  OOP start *********************************************************************
+
+class --> class is a set of object which share common strecture and behaviour just like template.
+object --> object is a real instance of class 
+Reference Variable --> It is a variable that stores the referance of the object or allow us to ue the mehods or fields of object.likeL Student s1 = new Student(); here Student is type/class and s1 is reverence variable and new Student() is a object.
+Insance variable (Non-Static) --> variable that declared inside a class without using static keyword.like in class String name; int roll_no; so here each each object get its own seperate copy 
+Insance variable (Static) -->variable that declared inside a class using static keyword. Like Static String name; static belongs to class and non static belongs to object , like Static String College = "AB" so every obj have the same college name 
+This keyword --> this refers variable that refer to the current object of the class. uses fo this keywords is refer to the current object's instance variable , call the current object's method , class another constructor of the same class, 
+Premitive Data Type --> Primitive  data type are data type that store simple values, they do not store the object referance, they have no method , they have no object , they can not be null. there are 8 built in primitive data type that stores simple values data type are byte, sort, int, long, float, dupble, char, boolean.
+Non-Primitive Data Type --> they are created form classes and store a reference to an object not the actual value directly.It also called Object type, reference Type, Derived Type,
+
+Has-A-Relationship (composition relationship)--> One class contains the object of the other class as field(Instance variable).Example Car is a class na Engin is a class now Car class has a field called Engin so it is Has a relationship.
+Uses-A-Relationship --> It means one class temporarily use another class, usually through method , parameters, local variable, or return type
+Example:
+class Pen {
+    void write() {
+        System.out.println("Writing...");
+    }
+}
+class Person {
+    void writeWith(Pen pen) {   // Person USES-A Pen
+        pen.write();
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Pen pen = new Pen();
+        Person person = new Person();
+        person.writeWith(pen);   // Person uses Pen
+    }
+}
+
+
+Is-A-Relationship(Inheritance) --> It means one class is a type of another classes, it implements using inheritance (extends), or interface(implemets).Constructor , Private, Static  can not be inherite by child . Child class automaticall call super()(parent constructor).
+
+
+Types of Inheritance
+
+1.Single --> single inheritance which means one child class inherit from exactly one parent class.
+
+Multi-level --> It means inherit happen in chain
+
+Hierarchical  ---> It means multiple child classes inherit from a single class like one parent have two or more then two child 
+
+Multiple --> 
+Hybrid --> 
+
+**************************************************************** Polymorphism start  done practice ***********************************************************************************************************
+-It means a method can behave differently in different situation 
+-Types of polymorphism:
+    1.Compile-Time-Polymorphism(Method overloading) = Compile-time polymorphism (also known as static polymorphism) is achieved through method overloading, where the method to be executed is resolved by the compiler based on the method signature and arguments.
+        Same method name, different parameters — the compiler picks the right one. 
+
+        class Calculator {
+            // 2 parameters
+            int add(int a, int b) {
+                return a + b;
+            }
+            // 3 parameters
+            int add(int a, int b, int c) {
+                return a + b + c;
+            }
+            // different data types
+            double add(double a, double b) {
+                return a + b;
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Calculator calc = new Calculator();
+                System.out.println(calc.add(5, 10));         // 15  → add(int, int)
+                System.out.println(calc.add(5, 10, 15));     // 30  → add(int, int, int)
+                System.out.println(calc.add(5.5, 10.2));     // 15.7 → add(double, double)
+            }
+        }
+
+        Why compile-time? The compiler sees the argument types at compile time and binds the call to the specific method signature.  No inheritance needed — it works within a single class.
+
+
+    2.Run-Time-Polymorphism(method overriding) = Runtime polymorphism (also known as dynamic polymorphism) is achieved through method overriding, where the method to be executed is resolved by the Java Virtual Machine (JVM)(VM uses dynamic method dispatch to invoke the overridden method based on the actual object type at runtime, rather than the reference type.) at runtime based on the actual object instance. 
+    Runtime Polymorphism (Method Overriding)
+        Same method in parent and child class — the JVM picks the right one based on the actual object. 
+
+        class Animal {
+            void sound() {
+                System.out.println("Animal makes a sound");
+            }
+        }
+
+        class Dog extends Animal {
+            @Override
+            void sound() {
+                System.out.println("Dog barks");
+            }
+        }
+
+        class Cat extends Animal {
+            @Override
+            void sound() {
+                System.out.println("Cat meows");
+            }
+        }
+
+        public class Main {
+            public static void main(String[] args) {
+                Animal animal;
+
+                animal = new Dog();
+                animal.sound();   // "Dog barks"  ← Dog's version called
+
+                animal = new Cat();
+                animal.sound();   // "Cat meows"  ← Cat's version called
+            }
+        }
+
+        Why runtime? The reference type is Animal, but the JVM checks the actual object (Dog or Cat) at runtime to decide which sound() to execute.  This is called late binding or dynamic dispatch.
+
+
+
+
+
+============================================================== Covariant Return Types ==============================================================
+
+
+-This = this is kerwork in java that means the current object(he object on which the method was called.).
+
+-understand this carefully = 
+
+class Animal {
+    Animal getAnimal() {
+        return this;
+    }
+}
+
+
+Animal a = new Animal();     // ① create real object, name it `a`
+Animal b = a.getAnimal();    // ② call the method
+
+What happens in step ②?
+
+a.getAnimal() starts running
+
+Inside the method, this points to the object a (the real Animal)
+
+return this; → gives back that object
+
+b now points to the same object as a
+
+============================================================== visibility  start ==============================================================
+-we can increate visiblity by override but can not reduce like parent have method protected so we can public but not allow to do private in child while override
+
+
+Correct             rules
+When overriding a method, you can increase visibility, but you cannot reduce it.
+
+Parent method	        Child method	    Valid?
+protected	            public	            Yes
+protected	            protected	        Yes
+public	                protected	        No
+public	                private	            No
+protected	            private         	No
+Package-private	        protected	        Yes
+
+===========================================================================================================================
+
+- can final method overriden = No, a final method cannot be overridden in Java because the final keyword prevents subclasses from changing its implementation.
+
+
+final method → cannot be overridden.
+
+
+static method → can be hidden, not overridden.
+
+
+private method → cannot be overridden.
+
+**************************************************************** Polymorphism end **********************************************************************************************************************
+
+
+
+============================================================= Upcasting and Downcasting =============================
+
+Upcasting(Generalization) means the Parent class reference to the child object like Parent a = new Child(); here we can access parent's method and override child method but only writen in child method can not be accessed.
+Downcasting(specilization) = converting parent reference into child reference before Parent p = new Child() now Child c = (Child) a;
+ClassCastException =  is a error of we cast the different object into differnt like Parent p = new Child1(); now Child c = (Child) P, here child1 is compulasary not child.use instanceof to safe casting like ( if instanceof a dog d so do this )
+equalsIgnoreCase = it is string method which compare string without cmplaring uppercase or lowercase.
+
+
+========================================================= Abstract keyword(abstract classes and methods) ======================================
+The abstract keyword is used to declare incomplete classes and methods that are intended to be completed or implemented by subclasses.
+Abstract class: A class that cannot be instantiated directly and may contain both abstract and concrete methods.
+Abstract method: A method declared without a body that a concrete subclass must implement, unless that subclass remains abstract.
+Absctract Cannot instantiate directly object.
+abstract class can have constructor.
+
+
+
+************************************************************************* Encapsulation start done practice *************************************************************************
+
+-Wrapping a data into a single unit is called encapsulation. Encapuslation provides us data hiding which can achived with access modifiers and packages.
+-Encapsulation is commonly achieved by declaring fields private and providing controlled access through public getter and setter methods.
+-Packages = It is kind of folder which stores several files. Use this namespace collision nahi hota , like i have two different packages and same file in that . 
+Access modifiesr = Public, Private,  protacted(accessable everywhere accept different packages subclass), defautl(No keyword need to write) accessable in same packages or folder
+Access modifier or return type how to use it like void teach(){} = here access a default and return type is void if i have to give the public so it would be public void teach(){}
+
+-can method private = yes method can be private 
+
+======================================================= Types of Encapsulated Classes (Intermediate) =====================================
+
+1. Fully Encapsulated (Read + Write)
+
+            class Person {
+                private String name;
+
+                public String getName() { return name; }
+                public void setName(String name) { this.name = name; }
+            }
+
+
+2. Read-Only (only getter) 
+
+            class Employee {
+                private final String id;
+
+                Employee(String id) { this.id = id; }
+
+                public String getId() { return id; }   // ← only getter, no setter
+            }
+
+
+
+3. Write-Only (only setter)
+
+            class Login {
+                private String password;
+
+                public void setPassword(String password) {   // ← only setter
+                    this.password = password;
+                }
+            }
+
+
+
+
+4: Fully Immutable 
+
+            final class Point {
+                private final int x;
+                private final int y;
+
+                Point(int x, int y) { this.x = x; this.y = y; }
+
+                public int getX() { return x; }
+                public int getY() { return y; }
+                // no setters at all
+            }
+
+
+ 5. Advanced Encapsulation (MNC-Level)
+
+        Defensive Copying
+
+        The PROBLEM 😱
+        You made your field private. You feel safe. But watch this:
+
+
+        import java.util.*;
+
+        class Team {
+            private List<String> members;          // private! nobody can touch it, right?
+
+            public Team(List<String> members) {
+                this.members = members;            // stores the reference
+            }
+
+            public List<String> getMembers() {
+                return members;                    // returns the reference
+            }
+        }
+
+
+
+        Now watch the attack:
+        java
+        List<String> myList = new ArrayList<>();
+        myList.add("Rahul");
+
+        Team t = new Team(myList);                 // create team with [Rahul]
+
+        // Attack 1: change the list AFTER giving it to Team
+        myList.add("Hacker");
+        System.out.println(t.getMembers());        // [Rahul, Hacker] 😱 CHANGED!
+
+        // Attack 2: change the list THROUGH the getter
+        t.getMembers().add("Intruder");
+        System.out.println(t.getMembers());        // [Rahul, Hacker, Intruder] 😱 CHANGED AGAIN!
+
+
+        What went wrong?
+        Your private field was not really protected. Why?
+
+        Because private protects the REFERENCE, not the OBJECT it points to.
+
+        Let me draw it:
+
+        text
+        myList ──────┐
+                        ├──────► [ ArrayList object ]  ← THE SAME LIST
+        Team.members ┘
+
+        The FIX ✅ — Defensive Copying
+        Don't store the caller's object. Store a COPY of it.
+        Don't return your object. Return a COPY of it.
+
+        java
+        import java.util.*;
+
+        class Team {
+            private final List<String> members;
+
+            public Team(List<String> members) {
+                this.members = new ArrayList<>(members);   // ✅ COPY IN
+            }
+
+            public List<String> getMembers() {
+                return new ArrayList<>(this.members);      // ✅ COPY OUT
+            }
+        }
+
+
+Why do we need BOTH copies?
+Copy	Where	Protects against
+Copy IN (constructor)	new ArrayList<>(members)	Caller changing the list after construction
+Copy OUT (getter)	return new ArrayList<>(...)	Caller changing the list through the returned reference
+If you only copy in, the caller can still attack through getMembers(). ❌
+If you only copy out, the caller can still attack through the original list they passed in. ❌
+You need both. ✅
+
+Which types need defensive copying?
+Only mutable types need copying:
+
+Type	                    Mutable?	        Needs defensive copy?
+String	                    ❌ Immutable	      ❌ No — String can't be changed
+Integer, int, double	    ❌ Immutable	      ❌ No
+List, Set, Map	            ✅ Mutable	     ✅ Yes
+Arrays int[], String[]	    ✅ Mutable	     ✅ Yes
+LocalDate (java.time)	    ❌ Immutable	     ❌ No
+
+Rule: If it's immutable, no copy needed. If it's mutable, copy it.
+
+
+
+************************************************************************* Encapsulation end  *************************************************************************
+
+
+===================================== POJO ==================================================================
+Plain Object Java Object
+seter/Mutator/ and gatter/accessarer 
+
+
+********************************************************************** Abstraction **********************************************************************
+hiding only implement details and showing only necessarily details
+Abstract class can have constructor. 
+declarative programming englarative progrmming 
+Abstract class 
+abstract method is a method that declared without a body, It have only signature(name, parameter, return type) and ends with " ; " not " {} " for example: abstract void moveTo(double deltaX, double deltaY);   
+
+================================================= Association with implementation ==================================
+Association mean tow separate classes are connected throught their object. Neither class own the other completely-they just know abut each other.
+Types of association:
+        a. weak "has-a"
+        b. Strong "has-a"
+
+Aggregation (weak association) --> one class contains another but the container object can exist imdepedently.like A department has a profeser if department is close or destroyed so still profeser exist.
+4. Composition (Strong Association) --> A can has a engin if can destroyed so engin too.
+
+
+===================================================================== final =====================================================================
+final is a keyword(modifier) that means can't be change  
+
+
+================================================= abstract, default, static, private, and private static methods ==============================================
+Static method that belongs to the class itself not to any specific object. We can call it using the class name without creating its object. It can not access instance variable and instance method directly because no object exist to point to. It can only call and access static variable and method because they all are class level.   
+Default method in interface is method that have body in interface it comes in java 8+ versions. 
+Private method is a method that have body in interface but it is accessable in interface only not accessable outside
+Abstract methods are the most fundamental member of an interface. They are implicitly public abstract.
+
+
+
+
+
+*************************************************************** Interface  done practice ***************************************************************
+-Interface is a blueprint or contract that define what a class must do. It can not be instantiated. It act as a reference type that contains abstract method(method signature without bodies) and constants.
+-Treditional interface were commonly described as providing complete abstraction because they primarily declared abstract methods. However, since Java 8, interfaces can contain concrete default and static methods, and since Java 9, private methods with bodies.
+-Interface can not have constructor. 
+-Interface method can not be final.
+-Interface provide abstraction and loose coupling.
+-Interface support polymorphism, inheritance, API constract design.
+-Interface can be use as a reference type like : i have parent Vehical (interface) and a chile(class) so i can write Vehical v = new chile(); . So interface can be used as a reference type.
+-Interface can have : public static method, public static final variable, default method, static method, private method(java 9+), private static method(java 9+).
+-Using Interface , we can achieve total abstraction by hiding implementation details. 
+-Variable are implicitly public, static, final not instance variable.
+-abstract methods are implicitly public abstract.Default methods are public and have a body.Static methods are public static.Private methods are private and have a body.
+-Method are implicitly public and static.
+-Java 8+ allow default and static method with bodies.
+-Java 9+ allow private method
+-if have to give body to method in interface so give default.
+-interface can not extent class
+-private method used as a utility method 
+-Interface can not have private field its field are implictly public static fianl.
+-all methods in an interface are implicitly public unless declared private.
+-diamond problem is occurs in multiple inheritance when a class inherit same method from to parent that both extend the common grandparent that create abiguity about which implementation to use.
+
+        Interface A
+       /           \
+Interface B     Interface C
+       \           /
+        Class D   
+
+
+interface A {
+    default void show() {
+        System.out.println("A's show");
+    }
+}
+
+interface B extends A {
+    @Override
+    default void show() {
+        System.out.println("B's show");
+    }
+}
+
+interface C extends A {
+    @Override
+    default void show() {
+        System.out.println("C's show");
+    }
+}
+
+class D implements B, C {
+    // ❌ COMPILE ERROR: inherits unrelated defaults for show()
+}   
+
+
+
+
+how to resolve it, 3 ways
+
+a. Override and write your own logic
+class D implements B, C {
+    @Override
+    public void show() {
+        System.out.println("D's own show");
+    }
+}
+
+
+
+b.Explicitly call one interface's version using InterfaceName.super.method()
+class D implements B, C {
+    @Override
+    public void show() {
+        B.super.show(); // explicitly picks B's version
+    }
+}
+
+
+c.Call both
+class D implements B, C {
+    @Override
+    public void show() {
+        B.super.show();
+        C.super.show();
+    }
+}
+
+-A method implemented in a class takes precedence over an interface default method.
+
+=========================================================== Comparable(Package: java.lang) vs Comparator(Package: java.util) =======================================================================
+-Comparable and Comparator are used to define sorting order. Comparable is in java.lang and defines natural ordering through compareTo(). Comparator is in java.util and defines custom ordering through compare(). A class typically implements Comparable for its natural order, whereas separate comparators allow multiple sorting criteria. Since Comparator is a functional interface, it can be implemented using a lambda expression.
+-Java gives you two ways to tell it "sort by this." comparable, comparator
+-EX: 
+        Imagine a line of people at a bus stop.
+
+        Comparable = Each person knows their own age. You just say "line up by age" and they figure it out themselves.
+
+        Comparator = A referee stands in front and says "next, line up by height" or "next, line up by shoe size." The people don't decide — the referee decides.
+
+-omparable — "I know my own order"
+The class itself decides how to compare.
+
+class Student {
+    int rollNo;
+    String name;
+
+    // "How do I compare myself with another student?"
+    // "By rollNo. If my rollNo is smaller, I come first."
+    int compareTo(Student other) {
+        return this.rollNo - other.rollNo;
+    }
+}
+
+-Collections.sort(list);  // "just sort them" — they know how
+
+-Problem in comparable: Only ONE way to sort. If you also want to sort by name, you'd have to rewrite compareTo() → you lose the rollNo sorting.
+
+
+-Comparator — "An outsider decides the order"
+You create a separate object that says "sort them like THIS."
+
+// "Sort by name"
+Comparator<Student> byName = (s1, s2) -> {
+    return s1.name.compareTo(s2.name);
+};
+
+// "Sort by age"
+Comparator<Student> byAge = (s1, s2) -> {
+    return s1.age - s2.age;
+};
+
+
+-Now you can sort as many ways as you want without touching the Student class:
+Collections.sort(list, byName);  // sort by name
+Collections.sort(list, byAge);   // sort by age   
+
+
+
+
+
+
+
+========================================================= Functional Interface (SAM Interface) =======================================================
+A interface which have only one abstract method (SAM — Single Abstract Method) and default and with body can have many methods but there must be only one abstaract method.
+Without it lembda can not exist in Java.
+
+@FunctionalInterface
+interface Greeting {
+    void say(String name);  // the ONE abstract method
+
+    default void log() {    // default methods are fine
+        System.out.println("Greeting called");
+    }
+
+    static void info() {    // static methods are fine
+        System.out.println("Greeting interface");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Lambda expression — no anonymous class needed
+        Greeting g = name -> System.out.println("Hello, " + name);
+        g.say("Bor");
+        g.log();
+    }
+}   
+
+@FunctionalInterface
+lembda -> A lambda is a short way to write a one-line implementation of a functional interface.
+
+            // before lembda 
+            Greeting g = new Greeting() {
+                @Override
+                public void say(String name) {
+                    System.out.println("Hello, " + name);
+                }
+            };
+            g.say("Bor");   
+
+
+            after lembda
+            Greeting g = name -> System.out.println("Hello, " + name);
+            g.say("Bor");   
+
+
+
+-Built-in Functional Interfaces -->  ava 8 provides 43 built-in functional interfaces in the java.util.function package.  They all fall into 4 categories based on what they take and what they retur
+
+Do I need to check something? → Predicate
+Do I need to do something (print, save)? → Consumer
+Do I need to convert something? → Function
+Do I need to create something from nothing? → Supplier
+
+- The 4 Core Interfaces
+Interface	            Method	                    Takes	        Returns	        Use
+Predicate<T>	        boolean test(T t)	        1 arg	        boolean	        Filter (yes/no check)
+Consumer<T>	            void accept(T t)	        1 arg	        nothing	        Do something (print, save)
+Function<T, R>	        R apply(T t)	            1 arg	        a value	        Transform input → output
+Supplier<T>	            T get()	                    nothing	        a value	        Produce a value
+
+-Ex:
+
+import java.util.function.*;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        // 1. PREDICATE — "Is this even?"
+        Predicate<Integer> isEven = n -> n % 2 == 0;
+        System.out.println(isEven.test(4));   // true
+
+        // 2. CONSUMER — "Print this"
+        Consumer<String> print = s -> System.out.println(s);
+        print.accept("Hello");                 // Hello
+
+        // 3. FUNCTION — "Square this number"
+        Function<Integer, Integer> square = n -> n * n;
+        System.out.println(square.apply(5));   // 25
+
+        // 4. SUPPLIER — "Give me a random number"
+        Supplier<Double> random = () -> Math.random();
+        System.out.println(random.get());      // e.g. 0.732
+    }
+}   
+
+============================================================== Marker Interface ==============================================
+-A  marker interface is just an empty interface (no methods, no fields) that you attach to a class to tell the JVM "this class has a special ability  It just tags a class so the JVM knows to treat it specially.
+-If we have to save out object in the file so we need implements Serializable , with Serializable java say "Okay, I'll convert your object's fields into bytes and write them to the file.".
+-A marker interface is an empty interface with no methods or fields.  It's used to tag a class so the JVM can check for it at runtime and apply special behavior.  The classic examples are Serializable and Cloneable. If a class doesn't implement the marker interface, the JVM throws an exception when the operation is attempted.
+
+Marker Interface	        What JVM checks	                                Exception if not implemented
+
+Serializable	            Can this object be saved to a file?	            NotSerializableException
+Cloneable	                Can this object be cloned?	                    CloneNotSupportedException
+Remote	                    Is this a remote method call (RMI)?	            NotSerializableException
+
+-Serializable — java.io
+-Cloneable — java.lang
+
+
+*************************************************************** Interface end *******************************************************************************************************************
+
+
+
+======================================================== Strings ============================================
+the sequense of character are called string
+-String is non premitive
+-String is class in java
+-we werite any thing in " " (double code ) called object of string
+-useing string class constructor we can make boject using new like String sr = new String("ankit") --> store in heep and SCP present in heep memory , heap memory present in RAM
+- string literals made using " " like "ankit" -> stores in SCP(strng constand poom)
+-String is immutable in java
+-StringBuffer is mutable and synchronised and thread safe it comes in java 1
+-StringBuilder , it is not synchronised and not thread safe it comes in java 1.5
+
+- Strig Methods
+
+    length()
+
+    charAt(int)
+
+    substring(int) - give a new string int he place of int place index from you want
+
+    substring(int, int)
+
+    equals(Object)
+
+    equalsIgnoreCase(String) = it check the string and ignore the lower case or upper case it just check the string. 
+
+    compareTo(String) -> it basically check the order like which comes first and which come after it give value + whne char come after it - when before and 0 when same. 
+
+    compareToIgnoreCase(String) -> similar like compareTo but there is one more featur with it i do not consider the case like it is upper case or lower case it just ingnore it 
+
+    indexOf(...) -> give the index of the character which cme first like there is banana so if i check indexOf("a") so it give 1 because it check the first occurance.
+
+    lastIndexOf(...) -> it check the last one like indexOf(..) check the first one.
+
+    contains(CharSequence)
+
+    startsWith(String)
+
+    endsWith(String)
+
+    replace(CharSequence, CharSequence) -> rewise it 
+
+    replaceAll(String, String) -> rewise it with    replace(CharSequence, CharSequence).
+
+    replaceFirst(String, String) -> only replace the first one.
+
+    split(String)
+
+    split(String, int) -> it split the string accoording to the ummber and it return an array of char 
+
+    join(CharSequence, CharSequence...):
+                                String result = String.join(" ", "I", "love", "Java");
+                                System.out.println(result); // I love Java
+
+    trim():
+            String s = "   Hello World   ";
+            String result = s.trim(); // "Hello World"
+ 
+
+    strip(): -> rewise
+
+
+    stripLeading() -> start from here to study  
+
+    stripTrailing()
+
+    isEmpty()
+
+    isBlank()
+
+    toLowerCase()
+
+    toUpperCase()
+
+    concat(String)
+
+    matches(String)
+
+    repeat(int)
+
+    intern()
+
+    toCharArray()
+
+    valueOf(...)
+
+    format(String, Object...)
+
+
+
+========================================= Exception handling =============================================================
+-it is a phenomenon that crash our flow of program 
+-Tye-catch, throw, throws, finally  
+- all exception are child of Exception class in java
+-Exception hierarchy must learn
+
+-Family tree of exception handling
+
+            Throwable  (the grandfather of all problems)
+            |
+            ├── Exception      → "Problems you CAN recover from"
+            │      |
+            │      ├── Checked Exception     → Compiler FORCES you to handle
+            │      └── RuntimeException      → Compiler doesn't care (bugs)
+            │
+            └── Error          → "Problems you CANNOT fix" (JVM level)
+
+
+
+- there is three types of problem in exception handling 
+
+1.Checked — compiler forces you to check 
+2.Runtime (Unchecked) — compiler ignores, it's your bug and it comes due to the error in code so we have to write good code
+3.Error — don't touch, JVM's problem
+
+-Checked vs Unchecked — The Simple Rule
+   - Checked = "External world problem" = Things outside your control — file missing, network down, DB not reachable. Because these failures are expected and recoverable. Java wants you to to handle this error.
+   - Unchecked = "Your bug" = You wrote bad code — null pointer, wrong index, divide by zero. we should fix the code not try to use try or catch 
+
+
+- ⚠️ Rule: Child first, Parent later
+
+// ❌ WRONG — won't compile
+catch (Exception e) { }        // parent first
+catch (NullPointerException e) { }  // child after — UNREACHABLE
+
+// ✅ CORRECT
+catch (NullPointerException e) { }  // specific first
+catch (Exception e) { }             // general later
+
+
+****************************88************************  throw vs throws *********************************************
+-throw = I'm throwing it NOW
+-Ex:
+        if (age < 18) {
+            throw new IllegalArgumentException("Too young!");
+        }
+
+
+-throws = I MIGHT throw it, be warned
+
+-EX:
+    public void readFile() throws IOException {
+        FileReader fr = new FileReader("data.txt");
+    }
+
+throw → you throw a ball 🏀 (object)
+
+throws → you declare "I might throw" (warning in signature)
+
+***************************************************************check or unchecked exception  ****************************************************
+check  - >  
+uncheck  -> 
+throws -> in the functin signature 
+throw -> apply in the bory 
+file -> funtin method loead all the things 
+try with resourse -> it automatically cllse file java se 7 update 
+file handling hierarchy full study 
+Nio and Nio 2 
+
+
+
+=================================================================== File Handling start ======================================================
+-There are two main things 
+-Write = 
+- Read = 
+- Important classes = File, FileWriter, FileReader  all of them belong to the java.io
+
+-Create file:
+
+            import java.io.File;
+            import java.io.IOException;
+
+            public class Demo {
+                public static void main(String[] args) {
+                    File f = new File("myfile.txt");   // just a "pointer" — no real file yet created in disk to create actual file use createNewFile();
+                    System.out.println("File object created");
+
+                    try{
+            if(f.createNewFile()){
+                System.out.println("File created " + f.getName());
+            }else{
+                System.out.println("File already exist");
+            }
+        }catch(IOException e){
+            System.out.println("Something went wrong "+ e.getMessage());
+        }
+                }
+            }
+
+
+
+- Write in file =   FileWriter
+
+- Read file = FileReader  -> it read one character at a time.
+
+-Append to a File (add WITHOUT deleting) = FileWriter w = new FileWriter("myfile.txt", true);
+- Delete file = file.delete()
+
+************************************** Check file Info start ************************************************************
+File f = new File("myfile.txt");
+
+f.exists();        // true / false → does the file exist?
+f.isFile();        // true if it's a file (not folder)
+f.isDirectory();   // true if it's a folder
+f.getName();       // "myfile.txt"  → file name
+f.getPath();       // relative path
+f.getAbsolutePath(); // full path like "C:\Users\Rahul\myfile.txt"
+f.length();        // file size in bytes
+f.canRead();       // true if readable
+f.canWrite();      // true if writable
+f.lastModified();  // date/time (as a long)
+
+**************************************************************Check file Info end********************************************************************
+
+*********************************************Problem with file reader/writer start*********************************************
+-FileReader reads one character at a time,so for a big file it is very slow.
+-FileWriter write one character at a time , too slow.
+- So java upgrade it to it with buffered  version in java 1.1 
+
+
+
+*********************************************Problem with file reader/writer end*********************************************
+
+************************************* Buddered version start *******************************************************
+-BufferedWriter  = write fast
+- BufferedReader
+
+************************************* Buddered version end *******************************************************
+
+
+************************************************** Modern way nio  start *****************************************
+-The MODERN way — Files class (Java 7+) = Java later added a much cleaner way to read and write files in one line. It's called java.nio.file.Files.
+
+            import java.nio.file.Files;
+            import java.nio.file.Path;
+            import java.nio.file.Paths;
+            import java.util.List;
+            import java.io.IOException;
+            
+
+- Write in one line = Files.writeString(Paths.get("myfile.txt"), "Hello from Files class!");
+- Read in one line = String content = Files.readString(Paths.get("myfile.txt"));
+                    System.out.println(content);
+
+
+-Read as a list of lines
+
+            List<String> lines = Files.readAllLines(Paths.get("myfile.txt"));
+            for (String line : lines) {
+                System.out.println(line);
+            }
+
+-Write many lines= 
+
+                List<String> lines = List.of("Line 1", "Line 2", "Line 3");
+                Files.write(Paths.get("myfile.txt"), lines);
+
+
+-Append in one line
+
+            Files.writeString(
+                Paths.get("myfile.txt"),
+                "Added at the end\n",
+                StandardOpenOption.APPEND
+            );
+
+-Check if file exists =Files.exists(Paths.get("myfile.txt"));   // true / false
+
+-Delete =       Files.delete(Paths.get("myfile.txt"));
+                Files.deleteIfExists(Paths.get("myfile.txt"));   // no error if missing
+
+-Create a file =Files.createFile(Paths.get("newfile.txt"));
+ ************************************************** Modern way nio end *****************************************
+
+********************************* file read with scanner *****************************8
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Demo {
+    public static void main(String[] args) {
+        try {
+            Scanner sc = new Scanner(new File("myfile.txt"));
+            String line = sc.nextLine();   // read one line
+            System.out.println(line);
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+    }
+}
+
+
+-Scanner constructor specifically throws FileNotFoundException (a subclass of IOException).
+
+
+********************************* file read with scanner  end ***************************************************************
+
+************************************************* Folders handling  start*******************************************************
+
+--Create a folder = 
+                    File folder = new File("myfolder");
+
+                            if (folder.mkdir()) {
+                                System.out.println("✅ Folder created: " + folder.getName());
+                            } else {
+                                System.out.println("❌ Could not create (already exists?)");
+                            }
+
+
+                            
+-mkdirs() =  makes ALL folders in the path
+
+-List files inside a folder  = list() — gives you names only
+        String[] names = folder.list();
+
+
+
+
+************************************************* Folders handling  end*******************************************************88
+
+******************************************* try-with-resources start ***************************************************
+-It come in java 7+
+- it comes because it solve the problem of file.close();
+-  before java 7 people use to do file.colse using finally block 
+
+-try-with-resources? = It's a special form of try that automatically calls close() on your resources when the block finishes — even if an error happens.
+-EX:
+
+            try (ResourceType resource = new ResourceType(...)) {
+                // use resource here
+            } catch (ExceptionType e) {
+                // handle error
+            }
+            // ← close() is called AUTOMATICALLY here, before catch even runs
+
+-Not every class works in try(...). The class must implement AutoCloseable (or its child Closeable).
+
+
+                                    Classes that work:
+
+Class	            Package	            What it's for
+FileReader	        java.io	            Reading text
+FileWriter	        java.io	            Writing text
+BufferedWriter	    java.io	            Fast writing
+BufferedReader	    java.io	            Fast reading
+Scanner	            java.util	        Reading
+PrintWriter	        java.io	            Printing
+FileInputStream	    java.io	            Binary reading
+FileOutputStream	java.io	            Binary writing
+
+
+******************************************* try-with-resources end ***************************************************
+
+
+-BufferOutput strim  = writing file.+
+-try with resourse = we do not need to write file.close()
+nio
+nio2
+0
+============file handling by bitebaseed =================================
+
+================================file handling by character based ======================================
+-bufferreader = take input in string 
+- class ka object serialized 
+- object inpus, object outpust stream , 
+- transeant to do not same field in the file 
+
+
+
+
+*********************************** cheet sheet of file handling *********************************************
+
+                                            Complete Cheat Sheet 🧠
+
+Task	            Old way	                                                Modern way (Files)
+Create file	        f.createNewFile()	                                    Files.createFile(path)
+Write (fresh)	    new FileWriter("f.txt") + write() + close()	            Files.writeString(path, "text")
+Append	            new FileWriter("f.txt", true)	                        Files.writeString(path, "text", APPEND)
+Read whole	        FileReader char by char (slow)	                        Files.readString(path)
+Read line by line	BufferedReader + readLine()	                            Files.readAllLines(path)
+Delete	            f.delete()	                                            Files.delete(path)
+Exists?	            f.exists()	                                            Files.exists(path)
+File size	        f.length()	                                            Files.size(path)
+
+
+
+==================================================== File Handling end ====================================================
+
+*********************************************************************  OOP end *********************************************************************
+
+
+
+================================================== Linke LIst ====================================
+- Like array store element in indexes and Link List stores element in saperate object called node where each node holds the data and the reference of the next node.
+-Node = Node is an objet containing tow things data(the value) and next(reference of next node)
+
+-Creating node like:
+
+class Node {
+    int data;
+    Node next;  // is not an integer. It is a reference whose type is Node
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+
+======================================== Need to ask ======================================================================
+
+so are they different ?? It is also called composition, aggregation, or association depending on how strong the relationship is
+association = agg + composiion 
+Loose coupling.
+Instantiation vs reference type
+utility method
+what is lembda expression
+-Is functional interface, marker interface are the types of interface?
+-Sealed Interface (Java 17+)
+- what is IOException it is class of method or what as similar that all fo relatd to the error or exception 
+-what is FileWriter class or method how to fing like that 
+-what is buffferinput/ ouput stream
+-study more bufferr class or operations use the clicked photo in my phone 
+
+-File handling :
+                Binary files — FileInputStream / FileOutputStream (for images, etc.)
+
+                Serialization — save whole Java objects to files
+
+                RandomAccessFile — jump to any position in a file
