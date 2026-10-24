@@ -187,16 +187,25 @@ Package-private	        protected	        Yes
 
 - can final method overriden = No, a final method cannot be overridden in Java because the final keyword prevents subclasses from changing its implementation.
 
+
+final method → cannot be overridden.
+
+
+static method → can be hidden, not overridden.
+
+
+private method → cannot be overridden.
+
 **************************************************************** Polymorphism end **********************************************************************************************************************
 
 
 
 ============================================================= Upcasting and Downcasting =============================
 
-Upcasting(Generalization) means the Parent class reference to the child object like Parent a = new Child(); here we can access parend method and overriden child method but only wrriten in child method can not be accessed.
+Upcasting(Generalization) means the Parent class reference to the child object like Parent a = new Child(); here we can access parent's method and override child method but only writen in child method can not be accessed.
 Downcasting(specilization) = converting parent reference into child reference before Parent p = new Child() now Child c = (Child) a;
 ClassCastException =  is a error of we cast the different object into differnt like Parent p = new Child1(); now Child c = (Child) P, here child1 is compulasary not child.use instanceof to safe casting like ( if instanceof a dog d so do this )
-equalsIgnoreCase = it is string method which compare string without cmplaring uppercase or lowercase. 
+equalsIgnoreCase = it is string method which compare string without cmplaring uppercase or lowercase.
 
 
 ========================================================= Abstract keyword(abstract classes and methods) ======================================
