@@ -168,6 +168,24 @@ return this; → gives back that object
 
 b now points to the same object as a
 
+******************************************** visibility  start*************************************************
+-we can increate visiblity by override but can not reduce like parent have method protected so we can public but not allow to do private in child while override
+
+
+Correct             rules
+When overriding a method, you can increase visibility, but you cannot reduce it.
+
+Parent method	        Child method	    Valid?
+protected	            public	            Yes
+protected	            protected	        Yes
+public	                protected	        No
+public	                private	            No
+protected	            private         	No
+Package-private	        protected	        Yes
+
+******************************************** visibility end *************************************************
+
+- can final method overriden = No, a final method cannot be overridden in Java because the final keyword prevents subclasses from changing its implementation.
 
 **************************************************************** Polymorphism end **********************************************************************************************************************
 
