@@ -380,9 +380,11 @@ Plain Object Java Object
 seter/Mutator/ and gatter/accessarer 
 
 
-********************************************************************** Abstraction **********************************************************************
-hiding only implement details and showing only necessarily details
-Abstract class can have constructor. 
+********************************************************************** Abstraction start done practice**********************************************************************
+-We achieve abstraction by using abstract class or interface.
+-hiding only implement details and showing only necessarily details
+-we can not crete the direct but we can create a reference of abstract class type that points to an object of a concrete subclass.
+-Abstract class can have constructor. The abstract class's constructor is called when a SUBCLASS object is created — via super().Java automatically calls super() in child.
 declarative programming englarative progrmming 
 Abstract class 
 abstract method is a method that declared without a body, It have only signature(name, parameter, return type) and ends with " ; " not " {} " for example: abstract void moveTo(double deltaX, double deltaY);   
@@ -407,6 +409,7 @@ Default method in interface is method that have body in interface it comes in ja
 Private method is a method that have body in interface but it is accessable in interface only not accessable outside
 Abstract methods are the most fundamental member of an interface. They are implicitly public abstract.
 
+********************************************************************** Abstraction  end**********************************************************************
 
 
 
@@ -556,7 +559,7 @@ Collections.sort(list, byAge);   // sort by age
 A interface which have only one abstract method (SAM — Single Abstract Method) and default and with body can have many methods but there must be only one abstaract method.
 Without it lembda can not exist in Java.
 
-@FunctionalInterface
+@FunctionalInterface // -> that tells the compiler: "This interface must have EXACTLY ONE abstract method.
 interface Greeting {
     void say(String name);  // the ONE abstract method
 
@@ -955,7 +958,7 @@ public class Demo {
 
 ********************************* file read with scanner  end ***************************************************************
 
-************************************************* Folders handling  start*******************************************************
+************************************************* Folders handling  start *******************************************************
 
 --Create a folder = 
                     File folder = new File("myfolder");
