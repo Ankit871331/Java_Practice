@@ -1,8 +1,6 @@
-************************************************************************** Java Basic *************************************
 
         
-
----------------------------------------------------Introduction java------------------------------------------------------
+-------------------------------------------------Introduction java------------------------------------------------------
 USP of java --> Java is simple, Java is strongly based on OOPS, Java is platform indepedent, Java is secure because it do not allow direct pointer manipulation and provide several security and varify bytecode, Java has garbage collection , Mutlithreading , it is fast because jvm and jit, provide many package mainly used for backend system, portable, dynamic, 
 
 JVM --> java virtual machine , JVM is a engin that runs bytecode , Hello.java ---> Javac ---> Hello.class here .class cotains the bytecode here JVM takes the bycode and execute it like -- Java bytecode ----> JVM -----> machine code.
@@ -20,7 +18,7 @@ Loop statement/ conditional statement
 
 
 
-*********************************************************************  OOP start *************************************************************
+*********************************************************************  OOP start *********************************************************************
 
 class --> class is a set of object which share common strecture and behaviour just like template.
 object --> object is a real instance of class 
@@ -56,7 +54,7 @@ public class Main {
 Is-A-Relationship(Inheritance) --> It means one class is a type of another classes, it implements using inheritance (extends), or interface(implemets).Constructor , Private, Static  can not be inherite by child . Child class automaticall call super()(parent constructor).
 
 
-Types of Inheritance
+***************************************************Types of Inheritance ***************************************************
 
 1.Single --> single inheritance which means one child class inherit from exactly one parent class.
 
@@ -381,9 +379,11 @@ Plain Object Java Object
 seter/Mutator/ and gatter/accessarer 
 
 
-********************************************************************** Abstraction **********************************************************************
-hiding only implement details and showing only necessarily details
-Abstract class can have constructor. 
+********************************************************************** Abstraction start done practice**********************************************************************
+-We achieve abstraction by using abstract class or interface.
+-hiding only implement details and showing only necessarily details
+-we can not crete the direct but we can create a reference of abstract class type that points to an object of a concrete subclass.
+-Abstract class can have constructor. The abstract class's constructor is called when a SUBCLASS object is created — via super().Java automatically calls super() in child.
 declarative programming englarative progrmming 
 Abstract class 
 abstract method is a method that declared without a body, It have only signature(name, parameter, return type) and ends with " ; " not " {} " for example: abstract void moveTo(double deltaX, double deltaY);   
@@ -408,6 +408,7 @@ Default method in interface is method that have body in interface it comes in ja
 Private method is a method that have body in interface but it is accessable in interface only not accessable outside
 Abstract methods are the most fundamental member of an interface. They are implicitly public abstract.
 
+********************************************************************** Abstraction  end**********************************************************************
 
 
 
@@ -557,7 +558,7 @@ Collections.sort(list, byAge);   // sort by age
 A interface which have only one abstract method (SAM — Single Abstract Method) and default and with body can have many methods but there must be only one abstaract method.
 Without it lembda can not exist in Java.
 
-@FunctionalInterface
+@FunctionalInterface // -> that tells the compiler: "This interface must have EXACTLY ONE abstract method.
 interface Greeting {
     void say(String name);  // the ONE abstract method
 
@@ -658,18 +659,87 @@ Remote	                    Is this a remote method call (RMI)?	            NotSe
 
 
 
-======================================================== Strings ============================================
-the sequense of character are called string
+****************************************************************************** Strings start done practice ****************************************************************
+-A String in Java is an object that represents a sequence of characters.
 -String is non premitive
 -String is class in java
 -we werite any thing in " " (double code ) called object of string
 -useing string class constructor we can make boject using new like String sr = new String("ankit") --> store in heep and SCP present in heep memory , heap memory present in RAM
-- string literals made using " " like "ankit" -> stores in SCP(strng constand poom)
+- string literals made using " " like "ankit" -> stores in SCP(string constand pool)
 -String is immutable in java
--StringBuffer is mutable and synchronised and thread safe it comes in java 1
--StringBuilder , it is not synchronised and not thread safe it comes in java 1.5
 
-- Strig Methods
+========================================= StringBuffer =========================================
+
+-it is mutable and synchronised and thread safe it comes in java 1
+-a mutable sequence of characters. You can append/modify WITHOUT creating new objects.
+-EX: 
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < 10000; i++) {
+                    sb.append(i);       // ✅ modifies the SAME object — no new objects!
+                }
+                String result = sb.toString();    // convert to String once at the end
+
+
+
+-================================================  StringBuilder =======================================================================================
+
+ -it is not synchronised and not thread safe it comes in java 5
+
+                                StringBuilder vs StringBuffer
+                        StringBuilder	                StringBuffer
+Thread-safe?	        ❌ No	                        ✅ Yes (synchronized)
+Speed	                ✅ Fast	                        ❌ Slower (locking overhead)
+When	                Single-threaded (99% of cases)	Multi-threaded sharing
+Since	                Java 5	                        Java 1.0
+
+Rule: Use StringBuilder by default. Use StringBuffer only if multiple threads share the same builder.
+
+
+-StringBuilder key methods
+
+
+StringBuilder sb = new StringBuilder("Hello");
+
+sb.append(" World");       // "Hello World"
+sb.insert(5, ",");         // "Hello, World"
+sb.delete(5, 6);           // "Hello World"
+sb.deleteCharAt(0);        // "ello World"
+sb.replace(0, 4, "Hi");    // "Hi World"
+sb.reverse();              // "dlroW iH"
+sb.length();               // 8
+sb.charAt(0);              // 'd'
+sb.toString();             // convert to String
+sb.setLength(0);           // clear (reuse buffer)
+
+-intern() = "Is this string in the pool? If yes, return the pool version. If no, add it to the pool and return that."
+
+
+************************************************* String Memory — Heap vs Pool******************************************
+
+JVM Memory:
+
+┌─────────────────────────────────┐
+│           HEAP                  │
+│                                 │
+│  ┌───────────────────────────┐  │
+│  │    String Pool            │  │  ← literals live here
+│  │    "Hello"                │  │
+│  │    "World"                │  │
+│  └───────────────────────────┘  │
+│                                 │
+│  [ "Hello" ]  ← new String()   │  ← new objects live here (outside pool)
+│  [ "World" ]  ← new String()   │
+│                                 │
+└─────────────────────────────────┘
+
+
+String Pool = a special area inside the heap for literals
+
+new String(...) = creates an object outside the pool
+
+
+===================================================== Strig Methods =====================================================
 
     length()
 
@@ -747,7 +817,7 @@ the sequense of character are called string
 
 
 
-========================================= Exception handling =============================================================
+************************************************************ Exception handling ************************************************************
 -it is a phenomenon that crash our flow of program 
 -Tye-catch, throw, throws, finally  
 - all exception are child of Exception class in java
@@ -816,10 +886,11 @@ file -> funtin method loead all the things
 try with resourse -> it automatically cllse file java se 7 update 
 file handling hierarchy full study 
 Nio and Nio 2 
+************************************************************ Exception handling end************************************************************
 
 
 
-=================================================================== File Handling start ======================================================
+************************************************************ File Handling start ************************************************************
 -There are two main things 
 -Write = 
 - Read = 
@@ -856,7 +927,7 @@ Nio and Nio 2
 -Append to a File (add WITHOUT deleting) = FileWriter w = new FileWriter("myfile.txt", true);
 - Delete file = file.delete()
 
-************************************** Check file Info start ************************************************************
+=========================================================== Check file Info start ===========================================================
 File f = new File("myfile.txt");
 
 f.exists();        // true / false → does the file exist?
@@ -870,25 +941,22 @@ f.canRead();       // true if readable
 f.canWrite();      // true if writable
 f.lastModified();  // date/time (as a long)
 
-**************************************************************Check file Info end********************************************************************
 
-*********************************************Problem with file reader/writer start*********************************************
+
+=========================================================== Problem with file reader/writer start ===========================================================
 -FileReader reads one character at a time,so for a big file it is very slow.
 -FileWriter write one character at a time , too slow.
 - So java upgrade it to it with buffered  version in java 1.1 
 
 
 
-*********************************************Problem with file reader/writer end*********************************************
-
-************************************* Buddered version start *******************************************************
+=========================================================== Buddered version start ===========================================================
 -BufferedWriter  = write fast
 - BufferedReader
 
-************************************* Buddered version end *******************************************************
 
 
-************************************************** Modern way nio  start *****************************************
+=========================================================== Modern way nio  start ===========================================================
 -The MODERN way — Files class (Java 7+) = Java later added a much cleaner way to read and write files in one line. It's called java.nio.file.Files.
 
             import java.nio.file.Files;
@@ -930,9 +998,9 @@ f.lastModified();  // date/time (as a long)
                 Files.deleteIfExists(Paths.get("myfile.txt"));   // no error if missing
 
 -Create a file =Files.createFile(Paths.get("newfile.txt"));
- ************************************************** Modern way nio end *****************************************
 
-********************************* file read with scanner *****************************8
+
+=========================================================== file read with scanner ===========================================================8
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -954,9 +1022,9 @@ public class Demo {
 -Scanner constructor specifically throws FileNotFoundException (a subclass of IOException).
 
 
-********************************* file read with scanner  end ***************************************************************
 
-************************************************* Folders handling  start*******************************************************
+
+=========================================================== Folders handling  start ===========================================================
 
 --Create a folder = 
                     File folder = new File("myfolder");
@@ -977,7 +1045,8 @@ public class Demo {
 
 
 
-************************************************* Folders handling  end*******************************************************88
+
+**************************************************************Check file Info end********************************************************************
 
 ******************************************* try-with-resources start ***************************************************
 -It come in java 7+
