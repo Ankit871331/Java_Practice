@@ -659,7 +659,7 @@ Remote	                    Is this a remote method call (RMI)?	            NotSe
 
 
 
-======================================================== Strings ============================================
+****************************************************************************** Strings start done practice ****************************************************************
 -A String in Java is an object that represents a sequence of characters.
 -String is non premitive
 -String is class in java
